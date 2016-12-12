@@ -56,13 +56,15 @@
 \end{introduction}
 
 \chapter{Popis problému}
+Repozitár slúži vo všeobecnosti ako centrálne miesto, ktoré sa stará o ukladanie a správu dát. Takúto službu môžu chcieť poskytovať rôzne inštitúcie (napríklad školy), knihovny,... Pod slovom repozitár si môžeme taktiež predstaviť konkrétny software, ktorý sa stará o ukladanie, archiváciu a sprístupnenie dát. V tejto diplomovej práci budeme pod slovom repozitár rozumieť práve software.
+
 \section{Zdieľanie dát v teame}
 Ústav organickej chémie VŠCHT Praha potrebuje vyriešiť ukladanie a sprístupnenie dát. Potrebujú ukladať, analyzovať a prezentovať infračervené vibračné, NMR a hmotnostné spektroskopické merania, chemické vzorce a reakcie.
 
-Ukladanie dát je potrebné nie len z dlhodobého hľadiska - teda zálohovanie a archivácia dát, ale je potrebné aj kvôli zdieľanému prístupu počas priebehu samotného výskumu, kedy nad jedným datasetom môže pracovať viacero ľudí. Je teda potrebné vyriešiť zdieľanie dát v teame, rôzne oprávnenia pre osoby, ktoré majú mať k dátam prístup, verzovanie dát.
+Nad jedným datasetom môže pracovať viacero ľudí, ktorý môžu riešiť rôzne merania a pokusy alebo spoločne pracovať na jednom meraní. V oboch prípadoch, počas priebehu samotného výskumu, potrebujú prístup k dátam, ktoré vytvoril iný člen teamu. Taktiež musia mať možnosť dáta upravovať (napr. opakované merania a pokusy, keď je potrebné doplniť nové výsledky). Je teda potrebné vyriešiť zdieľanie dát v teame, rôzne oprávnenia pre osoby, ktoré majú mať k dátam prístup, verzovanie dát.
 
 \section{Open data/Open access}
-Taktiež je pri vývoji repozitára potrebné myslieť na možnosť zverejnenia (časti) dát pre širokú verejnosť s možnosťou ich ďalšieho využitia alebo odkazovania sa na ne. Takto zverejnené dáta označujeme pojmom Open data. V prípade zverejnených výzkumov hovoríme o Open access (OA), kde sú k dispozícii dva stupne voľného prístupu. Prvý "gratis open access" garantuje prístup k dátam bez poplatku, druhý " libre open access"  garantuje, že prístup k dátam je taktiež zadarmo, naviac ale oprávňuje k ich ďalšiemu použitiu. Aké konkrétne práva autor udelí, záleží na ňom, využiť môže napríklad Creative Commons licencie[\url{ https://creativecommons.org/}].
+Taktiež je pri vývoji repozitára potrebné myslieť na možnosť zverejnenia (časti) dát pre širokú verejnosť s možnosťou ich ďalšieho využitia alebo odkazovania sa na ne. Takto zverejnené dáta označujeme pojmom Open data. V prípade zverejnených výzkumov hovoríme o Open access (OA).
 
 \section{Zálohovanie a archivácia}
 Zálohovaním dát rozumieme vytváranie kópie práve spracúvaných alebo v relatívne nedávnej dobe uložených dát. Archiváciou rozumieme uschovávanie dokumentačných materiálov.
@@ -71,12 +73,17 @@ Zálohované dáta môžu byť poškodené degradáciou média, fyzickým poško
 
 Pri archivácii dát je potrebné myslieť na čitateľnosť dát po dlhej dobe. Preto je potrebné myslieť nie len na zabezpečenie dát, ale aj na archiváciu programu potrebného pre prečítanie archivovaných dát.
 
+Repozitár by mal byť pre užívateľov možnosťou ako dáta zálohovať. Zároveň jeho napojenie na služby CESNETu umožní ochranu dát, akú by bolo na pracovisku VŠCHT Praha ťažké dosiahnúť.
+
+V budúcnosti bude možné repozitár rozšíriť o nástroje, ktoré by umožnili aj dlhodobú archiváciu dát.
+
 \chapter{Súčasné riešenia}
 \section{Bežné repozitáre}
-Repozitár slúži vo všeobecnosti ako centrálne miesto, ktoré sa stará o ukladanie a správu dát. Takúto službu môžu chcieť poskytovať rôzne inštitúcie (napríklad školy), knihovny,... Pod slovom repozitár si môžeme taktiež predstaviť konkrétny software, ktorý sa stará o ukladanie, archiváciu a sprístupnenie dát. V tejto časti diplomovej práce budeme pod slovom repozitár rozumieť práve software.
+Existujú rôzne repozitáre, ktoré sa od seba líšia použitou technológiou, možnosťou rozšírenia, používajú rôzne metadátové schémy. Niektoré sú voľné dostupné ako open source iné ako proprietárny software alebo hosťované aplikácie. V tejto časti je prehľad dostupných aplikácií. Zameriavam sa najmä na vlastnosti, ktoré boli pre ďalší vývoj repozitára kľúčové a to: open source (aby bolo možné software ďalej upravovať), použitie metadátovej schémy, modulárnosť softwaru (jednoduchá možnosť rozšírenia o ďalšie nástroje) a verzovanie (najmä kvôli zdieľaniu a zálohovaniu dát).
 
 % Tento software sa zameriava na dokumenty, ktoré majú byť voľne dostupné (anglicky Open Access) a online. Najčastejšie sa do takýchto inštitucionálnych repozitárov ukladajú textové dokumenty, pre ktoré je software najlepšie prispôsobený.
 
+\subsection{Metadáta}
 Na popis uložených dokumentov slúžia metadáta. Metadáta sú štrukturované dáta nesúce informáciu o primárnych dátach.\cite{iso8459-5} Kvôli vzájomnej prepojenosti repozitárov, vyhľadávaní dát a správnej interpretácii informácií je snaha o vyvinutie celosvetovo používaného štandardu pre popis dát.
 
 O to sa snažia rôzne metadátove schémy, pomocou ktorýchi je možné zdroje popísať. Medzi najznámejšie schémy patrí Dublin Core [\url{http://dublincore.org/}] a MARC [\url{http://www.loc.gov/marc/}].
@@ -182,25 +189,25 @@ Kvôli požiadavkom, ktoré sú kladené na repozitár, budeme potrebovať uprav
 
 Nad RESTapi bude postavené užívateľské webové rozhranie. Napájať sa teda budeme na vrstvu, ktorá sa stará o prístup k dátam a ich uchovávanie.
 
-\begin{figure}[h]
-\centering
-\caption{Architektúra komponentov \url{https://wiki.duraspace.org/display/FEDORA45/Fedora+4.5+Documentation}}
-\includegraphics[width=1.0\textwidth]{f4-stack.jpg}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\caption{Integrácia komponentov \url{https://wiki.duraspace.org/display/FEDORA45/Fedora+4.5+Documentation}}
-\includegraphics[width=1.0\textwidth]{f4-arch.png}
-\end{figure}
-
-
-Systémove požiadavky:
-\begin{enumerate}
-	\item Java 8
-	\item Servlet 3.0 container (Tomcat 7 a novší, Jetty 9.x a novší...)
-\end{enumerate}
+%\begin{figure}[h]
+%\centering
+%\caption{Architektúra komponentov \url{https://wiki.duraspace.org/display/FEDORA45/Fedora+4.5+Documentation}}
+%\includegraphics[width=1.0\textwidth]{f4-stack.jpg}
+%\end{figure}
+%
+%
+%\begin{figure}[h]
+%\centering
+%\caption{Integrácia komponentov \url{https://wiki.duraspace.org/display/FEDORA45/Fedora+4.5+Documentation}}
+%\includegraphics[width=1.0\textwidth]{f4-arch.png}
+%\end{figure}
+%
+%
+%Systémove požiadavky:
+%\begin{enumerate}
+%	\item Java 8
+%	\item Servlet 3.0 container (Tomcat 7 a novší, Jetty 9.x a novší...)
+%\end{enumerate}
 
 
 \chapter{Realizácia}
