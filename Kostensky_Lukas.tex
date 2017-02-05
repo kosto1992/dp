@@ -31,12 +31,12 @@
 % ODTIALTO DALEJ VSETKO ZMENTE
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
-\department{Katedra \ldots (DOPLŇTE)}
-\title{Doplňte názov práce}
-\authorGN{Doplňte Vaše krstné meno/mená} %(krstné) meno (mená) autora
-\authorFN{Doplňte Vaše priezvisko} % priezvisko autora
-\authorWithDegrees{Doplňte Vaše meno a tituly} %meno autora včetne súčasných akademických titulov
-\supervisor{Doplňte meno vedúceho práce}
+\department{Katedra softwarového inženýrství}
+\title{Spracovanie a vizualizácia chemických meraní v dátovom repozitári}
+\authorGN{Lukáš} %(krstné) meno (mená) autora
+\authorFN{Koštenský} % priezvisko autora
+\authorWithDegrees{Bc. Lukáš Koštenský} %meno autora včetne súčasných akademických titulov
+\supervisor{RNDr. David Antoš, Ph.D.}
 \acknowledgements{Doplňte, ak chcete niekomu za niečo poďakovať. V~opačnom prípade úplne odstráňte tento príkaz.}
 \abstractCS{V niekoľkých vetách zhrňte obsah a prínos tejto práce v~slovenčine. Po prečítaní abstraktu by mal čitateľ mať dosť informácií pre rozhodnutie, či Vašu prácu chce čítať.}
 \abstractEN{Sem doplňte ekvivalent abstraktu Vašej práce v~angličtině.}
@@ -86,16 +86,40 @@ Existujú rôzne repozitáre, ktoré sa od seba líšia použitou technológiou,
 \subsection{Metadáta}
 Na popis uložených dokumentov slúžia metadáta. Metadáta sú štrukturované dáta nesúce informáciu o primárnych dátach.\cite{iso8459-5} Kvôli vzájomnej prepojenosti repozitárov, vyhľadávaní dát a správnej interpretácii informácií je snaha o vyvinutie celosvetovo používaného štandardu pre popis dát.
 
-O to sa snažia rôzne metadátove schémy, pomocou ktorýchi je možné zdroje popísať. Medzi najznámejšie schémy patrí Dublin Core [\url{http://dublincore.org/}] a MARC [\url{http://www.loc.gov/marc/}].
+O to sa snažia rôzne metadátove schémy, pomocou ktorých je možné zdroje popísať. Medzi najznámejšie schémy patrí Dublin Core [\url{http://dublincore.org/}] a MARC [\url{http://www.loc.gov/marc/}].
 
+\subsubsection{Dublin Core}
+Dublin Core (skrátene DC) vznikol s cieľom jednoducho a všeobecne popísať webové zdroje. Táto schéma obsahuje 15  prvkov. To sú: názov (title), autor (creator), predmet (subject), popis (description), vydavateľ (publisher), prispievateľ (contributor), dátum (date), typ (type), formát (format), identifikátor (identifier), zdroj (source), jazyk (language), vzťah (relation), pokrytie (coverage) a práva (rights). Tieto prvky nie sú povinné a môžu sa opakovať. Jednotlivé vlastnosti sú teda pomenované. Ako sa World Wide Web menil, v snahe o vytvorenie sémantického webu, sa vyvinul aj štandard Dublin Core. Od roku 2008 obsahuje formálne domény a rozsahy v definiciách vlastností. Táto aktualizovaná varianta vlastností sa nazýva dcterms. Jednotlivé prvky môžu byť ďalej rozšírené o kvalifikátor. Ten môže lepšie určiť, čo daná položka popisuje. Napríklad namiesto všeobecného autora tak môžeme upresniť, či išlo o ilustrátora (dc:creator.ilustrator), editora (dc:creator.editor),...  Pre systémy, ktoré kvalifikátory nepoužívajú ale musí zostať význam zachovaný.
 
-Dublin Core (skrátene DC) vznikol s cieľom jednoducho a všeobecne popísať webové zdroje. Táto schéma obsahuje 15  prvkov. To sú: názov (title), autor (creator), predmet (subject), popis (description), vydavateľ (publisher), prispievateľ (contributor), dátum (date), typ (type), formát (format), identifikátor (identifier), zdroj (source), jazyk (language), vzťah (relation), pokrytie (coverage) a práva (rights). Tieto prvky nie sú povinné a môžu sa opakovať. Jednotlivé vlastnosti sú teda pomenované. Ako sa World Wide Web menil, v snahe o vytvorenie sémantického webu, sa vyvinul aj štandard Dublin Core. Od roku 2008 obsahuje formálne domény a rozsahy v definiciách vlastností. Táto aktualizovaná varianta vlastností sa nazýva dcterms. Jednotlivé prvky môžu ďalej obsahovať kvalifikátor. Ten môže lepšie určiť, čo daná položka popisuje. Napríklad namiesto všeobecného autora tak môžeme upresniť, či išlo o ilustrátora (dc:creator.ilustrator), editora (dc:creator.editor),...  Pre systémy, ktoré kvalifikátory nepoužívajú ale musí zostať význam zachovaný.
-
-
+\subsubsection{MARC}
 MARC využívajú najmä knihovníci. Bol navrhnutý pre popis bibliografických údajov v strojovo čitateľnej podobe.
-Schéma obsahuje vlastnosti, ktoré sú očíslované. Kým názov v dcterms je označený ako title, v MARCu  je označený číslom 245 (title proper statement). Na rozdiel od dcterms obsahuje niekoľko pomocných polí (ako napríklad 222 kľúčový názov, 240 unifikovaný názov,...). 
+Schéma obsahuje vlastnosti, ktoré sú očíslované. Kým názov v dcterms je označený ako title, v MARCu  je označený číslom 245 (title proper statement). Na rozdiel od dcterms obsahuje niekoľko pomocných polí (ako napríklad 222 kľúčový názov, 240 unifikovaný názov,...). Takéto označenie je ľahko čitateľné pre stroje, knihovníci si pri každodennej práci s týmito číslami, ich významy zapamätajú. Človek, ktorý ich vidí prvýkrát ale významu nerozumie.
+
+MARC je od DC komplikovanejší, dokáže ale presnejšie popísať zdroj.
+Prvé číslo v číselných kódoch určuje o aký typ informácie ide, jednotlivé kódy sú popísané v tabuľke \ref{tab:marc}. V prípade kódov 1XX, 4XX, 6XX, 7XX a 8XX sa obsah upresňuje doplnením dvojice čísel. Zvyčajne sa dodržiavajú následujúce dvojice: X00 - Mená osôb, X40 - Bibliografické názvy, X10 - Názvy firiem, X50 - Tématické pojmy, X11 - Názvy stretnutí/konferencií, X51 - Názvy miest, X30 - Jednotné názvy.
+
+\begin{table}\centering
+ 	\caption[MARC]{Typ informácie v kóde MARC}\label{tab:marc}
+ 	\begin{tabular}{|l|l|c|c|}\hline
+0XX	& Kontrolná informácia, identifikačné a klasifikačné čísla,...\tabularnewline \hline
+1XX	& Hlavné údaje \tabularnewline \hline
+2XX	& Názvy a kapitoly (názov, edícia, vydanie) \tabularnewline \hline
+3XX	& Fyzický popis,... \tabularnewline \hline
+4XX	& Informácie o dieloch/sériách \tabularnewline \hline
+5XX	& Poznámky \tabularnewline \hline
+6XX	& Kontaktné informácie na subjekty \tabularnewline \hline
+7XX	& Pridané informácie (iné než o subjektoch, dieloch/sériách); linkovacie polia \tabularnewline \hline
+8XX	& Rada pridaných informácií, informácie o holdingoch \tabularnewline \hline
+9XX	& Vyhradené pre lokálnu implementáciu \tabularnewline \hline
+ 	\end{tabular}
+ \end{table}
+
+
+Použitie navrhovaného repozitára by malo byť jednoduché aj pre užívateľov, ktorí s metadátami nemajú veľké skúsenosti a nepotrebujú komplikovaný popis dát. Pre skúsenejších užívateľov by však bolo dobré zachovať možnosť použitia zložitejších, prípadne vlastných metadátových schém.
 
 \subsection{Software}
+
+Výpis vlastností najrozšírenejších repozitárov:
 
 \subsubsection {Digital Commons}  [\url{http://digitalcommons.bepress.com/}]
 
@@ -181,13 +205,21 @@ Umožňuje verzovanie uložených dát.
 
 Open Source
 
-
 \quad
 
-Vrámci diplomovej práce pracujem s Fedorou verzie 4.5.
-Kvôli požiadavkom, ktoré sú kladené na repozitár, budeme potrebovať upraviť fungovanie REST frameworku. A to tak, aby aplikácia kontrolovala oprávnenia na zmenu stavov už pri spracovaní požiadavku.
+Keďže ani jeden existujúci repozitár nespĺňa všetky požiadavky alebo nevie uložiť/zobraziť dáta pre Ústav organickej chémie VŠCHT Praha, bolo potrebné vytvoriť nový alebo upraviť stávajúci software. Vytvorenie nového softwaru od základov by bolo neefektívne. Vyššie zmienené repozitáre fungujú, niektoré ich časti by teda boli programované nanovo. Zvolená bola možnosť doplniť/upraviť funkčnosť existujúceho repozitára. Výber vhodného repozitára bol možný z open source repozitárov, ktoré umožňujú úpravu kódu.
 
-Nad RESTapi bude postavené užívateľské webové rozhranie. Napájať sa teda budeme na vrstvu, ktorá sa stará o prístup k dátam a ich uchovávanie.
+Okrem toho boli, pri výbere vhodného repozitára, do úvahy brané ďalšie kritéria. A to možnosť použitia viacerých metadátových schém, programovací jazyk, podpora komunity. Do finálneho výberu sa dostali DSpace a Fedora. Oba repozitáre sú podobne výkonné (zvládajú milióny záznamov).
+
+Vďaka návrhu Fedory je do tohto softwaru jednoduchšie pridávanie rozšírení, taktiež už má vyriešené verzovanie uložených dát. DSpace má k dispozícii webové užívateľské rozhranie, ktoré je možné upravovať a ďalej rozširovať. Fedora používa jednoduché webové rozhranie, ktoré umožňuje len základnú prácu s dátami. Vytvorenie samostatného, nového webového užívateľského rozhrania s využitím RESTapi je ale jednoduchšie než úprava jadra DSpace, aby zvládal verzovanie uložených dát.
+
+Z existujúcich možností bola zvolená Fedora, ako najvhodnejší software pre možnosť ďalších, potrebných, úprav pre použitie vrámci služieb CESNET z.s.p.o. a splnenie požiadavkov Ústavu organickej chémie VŠCHT Praha.
+
+
+% Vrámci diplomovej práce pracujem s Fedorou verzie 4.5.
+% Kvôli požiadavkom, ktoré sú kladené na repozitár, budeme potrebovať upraviť fungovanie REST frameworku. A to tak, aby aplikácia kontrolovala oprávnenia na zmenu stavov už pri spracovaní požiadavku.
+
+% Nad RESTapi bude postavené užívateľské webové rozhranie. Napájať sa teda budeme na vrstvu, ktorá sa stará o prístup k dátam a ich uchovávanie.
 
 %\begin{figure}[h]
 %\centering
