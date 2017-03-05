@@ -1,0 +1,11 @@
+https://docs.oracle.com/javaee/7/tutorial/jaxrs003.htm#GIPZZ - Java 7 tutorial pre JAX-RS
+http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html - tutorial s vyuzitim JAX-RS
+
+http://docs.oracle.com/javaee/6/api/javax/ws/rs/package-summary.html - dokumentacia javax.ws.rs
+
+https://jersey.java.net/documentation/latest/filters-and-interceptors.html - priklad na vytvorenie interceptoru
+
+https://abhirockzz.wordpress.com/2016/03/08/binding-strategies-for-jax-rs-filters-and-interceptors/
+
+http://stackoverflow.com/questions/17560120/how-to-use-aspectj-load-time-weaving-with-tomcat-without-spring
+

@@ -1,0 +1,7 @@
+verzovanie
+pruznost modelu - ake typy metadat a ci mozu byt strukturovane
+modularnost
+
+Poznamky 29.9. popis dublin core, MARC
+Prehled viacerych repozitarov, zmienit komercne aj odvodene.
+Pisat radsej viac informacii, ktore sa mozu pripadne pouzit v inej casti textu (ak sa nebudu hodit do reserse)

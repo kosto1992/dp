@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+\providecommand{\biburl}[1]{\url{#1}}
+\providecommand{\urlprefix}{Dostupn{\' e} z: }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\selectlanguage}[1]{\relax}
+\providecommand{\eprint}[2][]{\biburl{#2}}
+
+\bibitem{zalohovanie}
+Strnad, M.: Svěřte svá data vhodnému médiu – díl 1. \emph{V:
+  LinuxEXPRES {[online]}}, október 2013, [cit. 2016-11-07].
+\urlprefix\biburl{https://www.linuxexpres.cz/praxe/sverte-sva-data-vhodnemu-mediu-dil-1}
+
+\bibitem{iso8459-5}
+Český normalizační institut: \emph{ČSN ISO 8459-5 (01 0175) Informace a
+  dokumentace - sborník bibliografických datových prvků. Část 5, Datové
+  prvky pro výměnu katalogizačních dat a metadata}. 2004.
+
+\end{thebibliography}

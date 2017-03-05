@@ -13,7 +13,6 @@
 
 \usepackage{graphicx} %graphics files inclusion
 \usepackage{hyperref} %hypertext
-\usepackage{graphicx}
 % \usepackage{amsmath} %advanced maths
 % \usepackage{amssymb} %additional math symbols
 
@@ -78,7 +77,7 @@ Repozitár by mal byť pre užívateľov možnosťou ako dáta zálohovať. Zár
 V budúcnosti bude možné repozitár rozšíriť o nástroje, ktoré by umožnili aj dlhodobú archiváciu dát.
 
 \chapter{Súčasné riešenia}
-\section{Bežné repozitáre}
+\section{Repozitáre}
 Existujú rôzne repozitáre, ktoré sa od seba líšia použitou technológiou, možnosťou rozšírenia, používajú rôzne metadátové schémy. Niektoré sú voľné dostupné ako open source iné ako proprietárny software alebo hosťované aplikácie. V tejto časti je prehľad dostupných aplikácií. Zameriavam sa najmä na vlastnosti, ktoré boli pre ďalší vývoj repozitára kľúčové a to: open source (aby bolo možné software ďalej upravovať), použitie metadátovej schémy, modulárnosť softwaru (jednoduchá možnosť rozšírenia o ďalšie nástroje) a verzovanie (najmä kvôli zdieľaniu a zálohovaniu dát).
 
 % Tento software sa zameriava na dokumenty, ktoré majú byť voľne dostupné (anglicky Open Access) a online. Najčastejšie sa do takýchto inštitucionálnych repozitárov ukladajú textové dokumenty, pre ktoré je software najlepšie prispôsobený.
@@ -167,9 +166,9 @@ Podporuje verzovanie uložených dát.
 
 Open Source
 
-\subsubsection {Zenodo} [\url{https://zenodo.org/}]
-
-Vyvinutý na základe Invenia, taktiež pre CERN. Má teda rovnaké vlastnosti ako Invenio.
+%\subsubsection {Zenodo} [\url{https://zenodo.org/}]
+%
+%Vyvinutý na základe Invenia, taktiež pre CERN. Má teda rovnaké vlastnosti ako Invenio.
 
 \subsubsection {EPrints} [\url{http://www.eprints.org/}]
 
@@ -205,15 +204,14 @@ Umožňuje verzovanie uložených dát.
 
 Open Source
 
-\quad
 
-Keďže ani jeden existujúci repozitár nespĺňa všetky požiadavky alebo nevie uložiť/zobraziť dáta pre Ústav organickej chémie VŠCHT Praha, bolo potrebné vytvoriť nový alebo upraviť stávajúci software. Vytvorenie nového softwaru od základov by bolo neefektívne. Vyššie zmienené repozitáre fungujú, niektoré ich časti by teda boli programované nanovo. Zvolená bola možnosť doplniť/upraviť funkčnosť existujúceho repozitára. Výber vhodného repozitára bol možný z open source repozitárov, ktoré umožňujú úpravu kódu.
+\section{Nástroje pre zber a organizáciu chemických dát}
+Výskumníci v oblasti chémie si vedú laboratórne denníky so záznamami hypotéz, experimentov, analýz alebo interpretáciou experimentov. V súčasnosti sa denníky vedú v elektronickej forme s využitím elektronických laboratórnych denníkov (často sa pre tento software používa skratka ELN). Ústav organickej chémie VŠCHT Praha využíva následujúce programy:
+\subsection{E-Notebook} [\url{http://www.cambridgesoft.com/Ensemble/E-notebook/}]
+Software od firmy Perkin Elmer. V súčasnosti je k dispozícii len ako Enterprise verzia s inštaláciou na serveroch Oracle priamo pre koncového zákazníka alebo ako súčasť cloudových aplikácií Elements \url{https://elements.perkinelmer.com/} a plánovaného ChemDraw E-notebook \url{http://chemdrawenotebook.perkinelmer.cloud/}.
 
-Okrem toho boli, pri výbere vhodného repozitára, do úvahy brané ďalšie kritéria. A to možnosť použitia viacerých metadátových schém, programovací jazyk, podpora komunity. Do finálneho výberu sa dostali DSpace a Fedora. Oba repozitáre sú podobne výkonné (zvládajú milióny záznamov).
-
-Vďaka návrhu Fedory je do tohto softwaru jednoduchšie pridávanie rozšírení, taktiež už má vyriešené verzovanie uložených dát. DSpace má k dispozícii webové užívateľské rozhranie, ktoré je možné upravovať a ďalej rozširovať. Fedora používa jednoduché webové rozhranie, ktoré umožňuje len základnú prácu s dátami. Vytvorenie samostatného, nového webového užívateľského rozhrania s využitím RESTapi je ale jednoduchšie než úprava jadra DSpace, aby zvládal verzovanie uložených dát.
-
-Z existujúcich možností bola zvolená Fedora, ako najvhodnejší software pre možnosť ďalších, potrebných, úprav pre použitie vrámci služieb CESNET z.s.p.o. a splnenie požiadavkov Ústavu organickej chémie VŠCHT Praha.
+\subsection{Open Enventory} [\url{https://www.chemie.uni-kl.de/goossen/open-enventory/}]
+Webová open source aplikácia napísaná v jazyku PHP. Využíva MySQL databázu.
 
 
 % Vrámci diplomovej práce pracujem s Fedorou verzie 4.5.
@@ -241,8 +239,105 @@ Z existujúcich možností bola zvolená Fedora, ako najvhodnejší software pre
 %	\item Servlet 3.0 container (Tomcat 7 a novší, Jetty 9.x a novší...)
 %\end{enumerate}
 
+\chapter{Analýza a návrh riešenia}
+\section{Analýza požiadavkov}
+\subsection{Funkčné požiadavky}
+Repozitár musí umožniť:
+\begin{itemize}
+	\item Uložiť nové dáta.
+	\item Upraviť existujúce dáta.
+	\item Zobraziť existujúce dáta.
+	\item Uložiť históriu zmien dát.
+	\item Vyhľadávať v metadátach.
+	\item Import dát z aplikácie Open Eventory.
+\end{itemize}
 
-\chapter{Realizácia}
+Prístup k jednotlivým objektom a poliam ale môže byť limitovaný. Vytváranie a úprava jednotlivých objektov je umožnená len konkrétnym užívateľom.
+
+Aplikácia Open Eventory musí byť upravená tak, aby umožnila export dát vo formáte vhodnom pre import do repozitára.
+
+\subsection{Požiadavky na vlastnosti repozitára}
+\begin{itemize}
+	\item Repozitár bude pre užívateľov dostupný ako webová aplikácia.
+	\item Repozitár musí umožniť ďalšie rozšírenie pre iné typy dát.
+	\item Repozitár bude napojený na služby CESNETu.
+\end{itemize}
+
+\section{Výber technologií}
+\subsection{Fedora}
+Keďže ani jeden existujúci repozitár nespĺňa všetky požiadavky alebo nevie uložiť/zobraziť dáta pre Ústav organickej chémie VŠCHT Praha, bolo potrebné vytvoriť nový alebo upraviť stávajúci software. Vytvorenie nového softwaru od základov by bolo neefektívne. Vyššie zmienené repozitáre fungujú, niektoré ich časti by teda boli programované nanovo. Zvolená bola možnosť doplniť/upraviť funkčnosť existujúceho repozitára. Výber vhodného repozitára bol možný z open source repozitárov, ktoré umožňujú úpravu kódu.
+
+Okrem toho boli, pri výbere vhodného repozitára, do úvahy brané ďalšie kritéria. A to možnosť použitia viacerých metadátových schém, programovací jazyk, podpora komunity. Do finálneho výberu sa dostali DSpace a Fedora. Oba repozitáre sú podobne výkonné (zvládajú milióny záznamov).
+
+Vďaka návrhu Fedory je do tohto softwaru jednoduchšie pridávanie rozšírení, taktiež už má vyriešené verzovanie uložených dát. DSpace má k dispozícii webové užívateľské rozhranie, ktoré je možné upravovať a ďalej rozširovať. Fedora používa jednoduché webové rozhranie, ktoré umožňuje len základnú prácu s dátami. Vytvorenie samostatného, nového webového užívateľského rozhrania s využitím RESTapi je ale jednoduchšie než úprava jadra DSpace, aby zvládal verzovanie uložených dát.
+
+Z existujúcich možností bola zvolená Fedora, ako najvhodnejší software pre možnosť ďalších, potrebných, úprav pre použitie vrámci služieb CESNET z.s.p.o. a splnenie požiadavkov Ústavu organickej chémie VŠCHT Praha.
+
+\subsection{Elasticsearch}
+Na vyhľadávanie v repozitáry bude použitá samostatná aplikácia Elasticsearch \url{https://www.elastic.co/products/elasticsearch}. Aplikácia umožňuje veľmi rýchle vyhľadávanie v indexovaných dátach. Dotazi je možné posielať s využitím RESTful api a JSONu.
+
+
+
+
+\chapter{Implementácia}
+\section{Design aplikácie}
+\includegraphics[width=1.0\textwidth]{diagramy/Architektura_repozitara.pdf}
+
+\subsection{Fedora}
+Ako už bolo zmienené v predchádzajúcej kapitole, ako backend pre repozitár bola zvolená Fedora. V nej sú uložené dáta, metadáta, typy modelov spolu s HTML šablónami, stavy a oprávnenia (ACL).
+
+\subsection{State engine}
+Pre možnosť využívania stavov bude nutné rozšíriť Fedoru o tento modul. Modul rieši prechody medzi stavmi, zmenu stavov, zmenu kontroléru stavov, konkrétnu operáciu povolí len oprávneným osobám. Oprávnené osoby sú určené pomocou ACL.
+
+\subsection{Fedora\_group\_plugin}
+Doplňujúci modul do Fedory, ktorý umožňuje overenie oprávnení aj na základe členstva v django skupinách. Samotná Fedora umožňuje overenie autorizácie na základe On-Behalf-Of hlavičky, toto rozšírenie umožňuje autorizáciu na základe On-Behalf-Of-Django-Groups hlavičky. Autorom pluginu je Mgr. Miroslav Šimek. Plugin je súčasťou git repozitára fedoralinku.
+
+\subsection{Elasticsearch}
+Aplikácia, ktorá umožňuje rýchle vyhľadavánie v metadátach.
+
+\subsection{Fedoralink}
+Aplikácia napísaná pre potreby repozitára záverečných prác VŠCHT Praha, v programovacom jazyku Python s využitím frameworku Django, stará sa o komunikáciu s Fedorou a Elasticsearch. Autorom fedoralinku je Mgr. Miroslav Šimek. Fedoralink bol počas vývoja repozitára, vrámci diplomovej práce, ďalej upravovaný. Aktuálnu verziu je možné nájsť na \url{https://github.com/mesemus/fedoralink}
+
+\subsection{Fedoralink\_ui}
+Súčasťou git repozitára fedoralinku. Modul sa stará o užívateľské rozhranie aplikácie. Pre komunikáciu s Fedorou využíva fedoralink.
+
+generic\_urls.py
+Funkcie vrámci tohto súboru mapujú URL adresy vrámci aplikácie na správne časti kódu pre zobrazenie, editáciu alebo vyhľadávanie. Z URL adresy zistíme ID objektu alebo kolekcie vo Fedore.
+
+Vzory využívajúce regulárne výrazy pre URL adresy:
+\begin{itemize}
+	\item '\textasciicircum\$' - index
+	\item r'\textasciicircum(?P<collection\_id>[a-fA-F0-9\_/-]*)extended\_search(?P<parameters>.*)\$' - vyhľadávanie vrámci kolekcie
+	\item '\textasciicircum(?P<id>.*)/addSubcollection\$' - pridanie novej subkolekcie
+	\item '\textasciicircum(?P<id>.*)/add\$' - vytvorenie nového objektu ako potomka objektu s daným ID
+	\item '\textasciicircum(?P<id>.*)/edit\$' - upravenie objektu s daným ID
+	\item '\textasciicircum(?P<id>.*)\$' - zobrazenie objektu s daným ID
+\end{itemize}
+
+O zobrazenie správnych údajov v správnej šablóne, prípadne o vytvorenie nového objektu/kolekcie so správnymi údajmi sa ďalej stará kód v súbore views.py.
+
+V samotnej aplikácií (vo fedoralinku alebo v koncovej aplikácii) musí byť model objektu - trieda v Pythone. Ostatné potrebné veci sú uložené priamo vo Fedore. Jednotlivé typy objektov, pri kolekciách je uložený typ subkolekcií a potomkov.Tieto objekty môžu mať naviac uložené šablóny pre zobrazenie, úpravu a vytvorenie potomkov. Taktiež je možné do Fedory uložiť typy jednotlivých polí a k nim šablóny pre ich zobrazenie/editáciu.
+
+Kód vo views.py teda z ID získa objekt, ku ktorému nájde vo Fedore uložený správny typ. Z neho následne získa šablónu, ktorú zobrazí. Ak sa správna šablóna pre objekt alebo pole nenachádza vo Fedore skúsi ju nájsť v aplikácii alebo použije šablóny uložené vo fedoralink\_ui, ktoré umožňujú aspoň základné zobrazenie informácií.
+
+Fedoralink\_ui taktiež obashuje kód potrebný pre cachovanie výsledných šablón zložených zo šablón typu objektu a jednotlivých polí, keďže získanie týchto údajov z Fedory je časovo náročné. Pre získanie výslednej šablóny je potrebné množstvo dotazov na Elasticsearch a následne Fedoru, počet dotazov záleží hlavne na komplikovanosti modelu objektu.
+
+Repozitár záverečných prác VŠCHT Praha pôvodne využíval aplikáciu s vlastnými šablónami. Po vzniku fedoralink\_ui ale aj tento repozitár začal využívať fedoralink\_ui.
+
+\subsection{Návrh grafického rozhrania}
+Repozitár bude nasadený ako jedna zo služieb diskového úložiska CESNET, z.s.p.o. \url{https://du.cesnet.cz/}, preto navrhnuté grafické rozhranie vychádza z už existujúcich služieb.
+
+Návrh zobrazenia pre dáta organickej chémie:
+\begin{figure}\centering
+	\includegraphics[width=1.0\textwidth]{grafika/list_InfraredSpectra.png}
+ 	\caption[listInfraredSpectra]{Výpis dát v kolekcii Infrared Spectra}\label{graphics:listInfrared}
+\end{figure}
+
+\begin{figure}\centering
+	\includegraphics[width=1.0\textwidth]{grafika/detail_Ethanol.png}
+ 	\caption[Ethanol]{Zobrazenie detailu konkrétnej položky (Ethanolu)}\label{graphics:Ethanol}
+\end{figure}
+
 
 \begin{conclusion}
 	%sem napíšte záver Vašej práce
@@ -256,6 +351,7 @@ Z existujúcich možností bola zvolená Fedora, ako najvhodnejší software pre
 \chapter{Zoznam použitých skratiek}
 % \printglossaries
 \begin{description}
+	\item[ELN] Electronic lab notebook
 	\item[GUI] Graphical user interface
 	\item[XML] Extensible markup language
 \end{description}

@@ -1,0 +1,6 @@
+JAX-RS filtre a interceptory
+-global binding
+-named binding
+-dynamic binding
+
+Este sa pozriet na Interceptory JAX-R

@@ -1,0 +1,85 @@
+http://invenio.nusl.cz/record/201205/files/idr-979_1.pdf
+
+http://www.vse.cz/vskp/eid/34859
+
+https://en.wikipedia.org/wiki/Digital_library
+
+Ahoj,
+
+doplnil som zdroje, ktore mam najdene k jednotlivym kapitolam. Ku stavom mam len zdroje, ktore sa tykaju samotnej implementacie. Nedari sa mi najst navrhy, resp. protokoly k stavom. Teda okrem toho, co uz stihol spisat Mira (v prilohe).
+
+
+Momentalne sa mi zda, ze ako dalsie by bolo najlepsie zacat spisovat cast 2. a) Sucasne riesenia - bezne repozitare.
+
+
+
+1.       Popis problému
+
+a.       Máme chemické dáta, zdielanie dát v teamu
+
+b.      Open data/open access
+
+c.       Zálohovanie a archivácia dát
+
+2.       Súèasné riešenia
+
+Dublin Core/MARC
+http://www.eurocris.org/Uploads/Web%20pages/CRIS-IR_workplan/FormatCompare_eng_final.pdf 
+
+a.       Bežné repozitáre (knihovnícke) – èo dokážu, technické riešenia...
+
+    http://cameronneylon.net/blog/building-the-perfect-data-repository-or-the-one-that-might-get-used/
+
+    http://www.libsys.co.in/
+    
+    http://www.greenstone.org/
+
+    http://inveniosoftware.org/
+
+    http://www.dspace.org/
+
+    http://www.fedora-commons.org/  ,  http://eprints.rclis.org/8012/1/DigitalniRepozitarFedora.pdf
+
+porovnanie:
+http://eprints.rclis.org/6907/1/univerzalni_digitalni_repozitar.pdf
+
+https://open.library.ubc.ca/cIRcle/collections/42591/items/1.0075768
+
+
+b.      Nástroje pre zber a organizáciu chemických dát
+
+3.       Analýza a návrh riešenia
+
+a.       Analýza požiadavkov
+
+b.      Výber technologií
+
+4.       Implementácia
+
+a.       Design aplikácie
+
+b.      Zobrazovanie chemických dát
+
+c.       Automatický import dát
+
+d.      Kontrola stavov a prístupové práva
+
+    Git používa ACLs https://wincent.com/wiki/Git_repository_access_control
+
+   
+
+
+    Implementacia stavov, napojenie na Fedora core: https://docs.oracle.com/javaee/7/tutorial/jaxrs003.htm#GIPZZ - Java 7 tutorial pre JAX-RS
+http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html - tutorial s vyuzitim JAX-RS
+
+http://docs.oracle.com/javaee/6/api/javax/ws/rs/package-summary.html - dokumentacia javax.ws.rs
+
+https://jersey.java.net/documentation/latest/filters-and-interceptors.html - priklad na vytvorenie interceptoru
+
+https://abhirockzz.wordpress.com/2016/03/08/binding-strategies-for-jax-rs-filters-and-interceptors/
+
+http://stackoverflow.com/questions/17560120/how-to-use-aspectj-load-time-weaving-with-tomcat-without-spring
+
+5.       Vyhodnotenie
+
+6.       Záver
