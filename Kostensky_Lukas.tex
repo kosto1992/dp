@@ -119,11 +119,12 @@ Prvé číslo v číselných kódoch určuje, o aký typ informácie ide, jednot
  \end{table}
 
 
-Použitie navrhovaného repozitára by malo byť jednoduché aj pre užívateľov, ktorí s metadátami nemajú veľké skúsenosti a nepotrebujú komplikovaný popis dát. Pre skúsenejších užívateľov by však bolo dobré zachovať možnosť použitia zložitejších, prípadne vlastných metadátových schém.
+Použitie navrhovaného repozitára by malo byť jednoduché aj pre užívateľov, ktorí s metadátami nemajú veľké skúsenosti a nepotrebujú komplikovaný popis dát. Pre skúsenejších užívateľov by však bolo dobré zachovať možnosť použitia zložitejších, prípadne vlastných metadátových schém. Repozitár by teda mal vedieť používať aj iné metadátove schémy než len Dublin Core alebo MARC.
 
 \subsection{Software}
+V tejto časti popisujem prehľad najrozšírenejších softwarov, ktoré sa používajú ako implementácie repozitárov. Uvádzam prehľad pre nás dôležitých vlastností a to, či ide o proprietárny alebo open source systém, kvôli možnosti ďalších úprav; programovací jazyk a modulárnosť softwaru; aké metadátové schémy používajú a či ich je možné rozširovať; a či daný software umožňuje verziovanie uložených dát.
 
-Výpis vlastností najrozšírenejších repozitárov:
+Pretože každý software pokrýva inú kombináciu týchto vlastností, repozitáre neklasifikujem, len uvádzam prehľad ich vlastností:
 
 \subsubsection {Digital Commons}  [\url{http://digitalcommons.bepress.com/}]
 
@@ -211,7 +212,9 @@ Open Source
 
 
 \section{Nástroje na zber a organizáciu chemických dát}
-Výskumníci v oblasti chémie si vedú laboratórne denníky so záznamami hypotéz, experimentov, analýz alebo interpretáciou experimentov. V súčasnosti sa denníky vedú v elektronickej forme s využitím elektronických laboratórnych denníkov (často sa pre tento software používa skratka ELN). Ústav organickej chémie VŠCHT Praha využíva nasledujúce programy:
+Výskumníci v oblasti chémie si vedú laboratórne denníky so záznamami hypotéz, experimentov, analýz alebo interpretáciou experimentov. V súčasnosti sa denníky vedú v elektronickej forme s využitím elektronických laboratórnych denníkov (často sa pre tento software používa skratka ELN). Pretože Ústav organickej chémie VŠCHT Praha používa a naďalej chce používať len E-Notebook a Open Enventory, iné nástroje na zber a organizáciu chemických dát v prehľade neuvádzam.
+
+Prehľad programov, ktoré používa Ústav organickej chémie VŠCHT Praha:
 \subsection{E-Notebook} [\url{http://www.cambridgesoft.com/Ensemble/E-notebook/}]
 Software od firmy Perkin Elmer. V súčasnosti je k dispozícii len ako Enterprise verzia s inštaláciou na serveroch Oracle priamo pre koncového zákazníka alebo ako súčasť cloudových aplikácií Elements \url{https://elements.perkinelmer.com/} a plánovaného ChemDraw E-notebook \url{http://chemdrawenotebook.perkinelmer.cloud/}.
 
@@ -295,7 +298,13 @@ Metadáta vo Fedore sú uložené vo formáte RDF (Resource Description Format),
 Pre možnosť využívania stavov bude nutné rozšíriť Fedoru o tento modul. Modul rieši prechody medzi stavmi, zmenu stavov, zmenu kontroléru stavov, konkrétnu operáciu povolí len oprávneným osobám. Oprávnené osoby sú určené pomocou ACL.
 
 \subsection{Fedora\_group\_plugin}
-Doplňujúci modul do Fedory, ktorý umožňuje overenie oprávnení aj na základe členstva v django skupinách. Samotná Fedora umožňuje overenie autorizácie na základe On-Behalf-Of hlavičky, toto rozšírenie umožňuje autorizáciu na základe On-Behalf-Of-Django-Groups hlavičky. Autorom pluginu je Mgr. Miroslav Šimek. Plugin je súčasťou git repozitára fedoralinku.
+Doplňujúci modul do Fedory, ktorý umožňuje overenie oprávnení aj na základe členstva v django skupinách. Samotná Fedora s webac umožňuje overenie autorizácie na základe štandardnej On-Behalf-Of hlavičky, o ktoré sa stará DelegateHeaderPrincipalProvider. Rozšírenie Fedora\_group\_plugin umožňuje autorizáciu na základe On-Behalf-Of-Django-Groups hlavičky, o ktoré sa stará DjangoGroupPrincipalProvider. Autorom tohto pluginu je Mgr. Miroslav Šimek. 
+
+Plugin je súčasťou git repozitára fedoralinku. Impersonifikácia na iného užívateľa alebo skupinu je umožnená len pod FedoraAdmin užívateľom. Hodnota posielaná v týchto hlavičkách je vo forme urn.
+Ak teda máme na vstupe užívateľské meno vo forme emailu (napr. \uv{user@vscht.cz}), výsledná hodnota bude \uv{urn:vscht.cz:user}, inak je v tvare \uv{urn:user}. 
+Skupiny sú získané z užívateľovych skupín v Djangu.
+
+Vďaka tomuto rozšíreniu bude možné jednoduché rozšírenie repozitára o autentizáciu cez iného poskytovateľa identity (napr. Shibboleth).
 
 \subsection{Elasticsearch}
 Aplikácia, ktorá umožňuje rýchle vyhľadavánie v metadátach.
@@ -355,7 +364,7 @@ class DCObject(IndexableFedoraObject):
 
 Trieda DCObject bude využitá pri dátach získaných z Fedory, ktoré obsahujú metadáta podľa schémy DublinCore. Samotná trieda dedí z triedy IndexableFedoraObject.
 
-IndexedLanguageField - metadátové pole, ktoré môže byť vo viacerých jazykoch. Za samotnou hodnotov je vložený parameter "@lang", ktorý podľa skratky jazyka ("en", "cs") určuje, v akom jazyku je daná hodnota.
+IndexedLanguageField - metadátové pole, ktoré môže byť vo viacerých jazykoch. Za samotnou hodnotov je vložený parameter \uv{@lang}, ktorý podľa skratky jazyka (\uv{en}, \uv{cs}) určuje, v akom jazyku je daná hodnota.
 IndexedTextField - metadátové pole, ktoré obsahuje textový reťazec.
 IndexedDateTimeField - metadátové pole obsahujúce dátum a čas.
 
@@ -435,28 +444,85 @@ def get_object_class(metadata, model_class=None):
 \subsection{Fedoralink\_ui}
 Je súčasťou git repozitára fedoralinku. Modul sa stará o užívateľské rozhranie aplikácie. Pre komunikáciu s Fedorou využíva fedoralink.
 
-generic\_urls.py
-Funkcie v rámci tohto súboru mapujú URL adresy v aplikácii na správne časti kódu pre zobrazenie, editáciu alebo vyhľadávanie. Z URL adresy zistíme ID objektu alebo kolekcie vo Fedore.
+\subsubsection{Mapovanie generických URL adries}
+Funkcie v rámci súboru {\em generic\_urls.py} mapujú URL adresy v aplikácii na správne časti kódu pre zobrazenie, editáciu alebo vyhľadávanie. Z URL adresy zistíme ID objektu alebo kolekcie vo Fedore.
 
 Vzory využívajúce regulárne výrazy pre URL adresy:
 \begin{itemize}
 	\item '\textasciicircum\$' - index
-	\item r'\textasciicircum(?P<collection\_id>[a-fA-F0-9\_/-]*)extended\_search(?P<parameters>.*)\$' - vyhľadávanie v rámci kolekcie
+	\item r'\textasciicircum(?P<collection\_id>[a-fA-F0-9\_/-]*)?search(?P<parameters>.*)\$' - vyhľadávanie v rámci kolekcie
 	\item '\textasciicircum(?P<id>.*)/addSubcollection\$' - pridanie novej subkolekcie
 	\item '\textasciicircum(?P<id>.*)/add\$' - vytvorenie nového objektu ako potomka objektu s daným ID
 	\item '\textasciicircum(?P<id>.*)/edit\$' - upravenie objektu s daným ID
 	\item '\textasciicircum(?P<id>.*)\$' - zobrazenie objektu s daným ID
 \end{itemize}
 
+Tieto generické URL adresy môžu byť ďalej rozšírené v niektorej časti aplikácie.
+
+\subsubsection{Získanie šablóny pre zobrazenie, editáciu objektu alebo zoznam objektov v kolekcii}
 O zobrazenie správnych údajov v správnej šablóne, prípadne o vytvorenie nového objektu/kolekcie so správnymi údajmi sa ďalej stará kód v súbore views.py.
 
 V samotnej aplikácii (vo fedoralinku alebo v koncovej aplikácii) musí byť model objektu - trieda v Pythone. Ostatné potrebné veci sú uložené priamo vo Fedore. V nej sú uložené jednotlivé typy objektov, pri kolekciách je uložený typ subkolekcií a potomkov. Tieto objekty môžu mať naviac uložené šablóny pre zobrazenie, úpravu a vytvorenie potomkov. Taktiež je možné do Fedory uložiť typy jednotlivých polí a k nim šablóny pre ich zobrazenie/editáciu.
 
+Trieda ResourceType, ktorá dedí z IndexableFedoraObject umožňuje uložiť šablóny pre rôzne objekty. Získanie správneho typu objektu je možné vďaka párovaniu cez RDF typ.
+\begin{lstlisting}[frame=single] 
+class ResourceType(IndexableFedoraObject):
+    label = IndexedTextField(CESNET_TYPE.label, verbose_name=_('Label'), level=IndexedField.MANDATORY)
+
+    template_view = IndexedLinkedField(CESNET_TYPE.template_view, Template, verbose_name=_('Template for view'))
+
+    template_edit = IndexedLinkedField(CESNET_TYPE.template_edit, Template, verbose_name=_('Template for edit'))
+
+    template_list_item = IndexedLinkedField(CESNET_TYPE.template_list_item, Template,
+                                            verbose_name=_('Template for item list view'))
+
+    controller = IndexedTextField(CESNET_TYPE.controller, verbose_name=_('Controller class'),
+                                  level=IndexedField.MANDATORY)
+
+    rdf_types = IndexedTextField(CESNET_TYPE.rdf_types, verbose_name=_('RDF types'), level=IndexedField.MANDATORY,
+                                 multi_valued=True)
+
+    fedoralink_model = IndexedTextField(CESNET_TYPE.fedoralink_model, verbose_name=_('Fedoralink model class name'),
+                                        level=IndexedField.MANDATORY)
+
+    class Meta:
+        rdf_types = (CESNET_TYPE.ResourceType,)
+\end{lstlisting}
+
 Kód vo views.py teda z ID získa objekt, ku ktorému nájde vo Fedore uložený správny typ. Z neho následne získa šablónu, ktorú zobrazí. Ak sa správna šablóna pre objekt alebo pole nenachádza vo Fedore, skúsi ju nájsť v aplikácii alebo použije všeobecné šablóny uložené vo fedoralink\_ui, ktoré umožňujú aspoň základné zobrazenie informácií.
 
+\subsubsection{Cachovanie šablón}
 Fedoralink\_ui taktiež obsahuje kód potrebný pre cachovanie výsledných šablón zložených zo šablón typu objektu a jednotlivých polí, keďže získanie týchto údajov z Fedory je časovo náročné. Pre získanie výslednej šablóny je potrebné množstvo dopytov na Elasticsearch a následne na Fedoru, počet dopytov záleží hlavne na komplikovanosti modelu objektu.
 
-Repozitár záverečných prác VŠCHT Praha pôvodne využíval aplikáciu s vlastnými šablónami. Po vzniku fedoralink\_ui ale aj tento repozitár začal využívať fedoralink\_ui.
+O cachovanie sa stará trieda {\em FedoraTemplateCache}.
+
+Prehľad vybraných metód v triede:
+\begin{lstlisting}[frame=single] 
+@staticmethod
+    def get_resource_type(rdf_meta):
+        for rdf_type in rdf_meta:
+            retrieved_type = list(ResourceType.objects.filter(rdf_types__exact=rdf_type))
+            if retrieved_type:
+                return retrieved_type[0]
+        return None
+\end{lstlisting}
+Metóda {\em get\_resource\_type} umožňuje získať správny RDF typ objektu.
+
+\begin{lstlisting}[frame=single] 
+@staticmethod
+@simple_cache
+def _get_template_string_internal(rdf_types, view_type):
+    return FedoraTemplateCache._load_template(FedoraTemplateCache.get_template_object(rdf_types, view_type))
+
+@staticmethod
+def _load_template(template_object):
+    if template_object is not None and template_object.get_bitstream() is not None:
+        return template_object.get_bitstream().stream.read().decode("utf-8")
+    return None
+\end{lstlisting}
+Metóda {\em \_load\_template} získa bitstream z objektu šablóny, ktorý máme z Fedory. Bitstream následne dekóduje a uloží ako reťazec, dáta do Fedory ukladáme v kódovaní \mbox{utf-8}. O cachovanie tejto šablóny sa stará metóda {\em \_get\_template\_string\_internal}.
+
+Repozitár záverečných prác VŠCHT Praha pôvodne využíval šablóny uložené priamo v kóde aplikácie. Po vzniku fedoralink\_ui ale aj tento repozitár začal využívať fedoralink\_ui.
 
 \subsection{Návrh grafického rozhrania}
 Repozitár bude nasadený ako jedna zo služieb diskového úložiska CESNET, z.s.p.o. \url{https://du.cesnet.cz/}, preto navrhnuté grafické rozhranie vychádza z už existujúcich služieb.
@@ -489,6 +555,7 @@ Návrh zobrazenia pre dáta organickej chémie:
 	\item[GUI] Graphical user interface
 	\item[XML] Extensible markup language
 	\item[RDF] Resource Description Format
+	\item[ACL] Access control list
 \end{description}
 
 
