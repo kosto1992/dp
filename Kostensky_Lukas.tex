@@ -310,7 +310,7 @@ Vďaka tomuto rozšíreniu bude možné jednoduché rozšírenie repozitára o a
 Aplikácia, ktorá umožňuje rýchle vyhľadavánie v metadátach.
 
 \subsection{Fedoralink}
-Aplikácia napísaná pre potreby repozitára záverečných prác VŠCHT Praha, v programovacom jazyku Python s využitím frameworku Django, stará sa o komunikáciu s Fedorou a Elasticsearch. Autorom fedoralinku je Mgr. Miroslav Šimek. Fedoralink bol počas vývoja repozitára ďalej upravovaný v rámci diplomovej práce. Aktuálnu verziu je možné nájsť na \url{https://github.com/mesemus/fedoralink}
+Aplikácia napísaná pre potreby repozitára záverečných prác VŠCHT Praha, v programovacom jazyku Python s využitím frameworku Django, stará sa o komunikáciu s Fedorou a Elasticsearch. Autorom fedoralinku je Mgr. Miroslav Šimek. Fedoralink bol počas vývoja repozitára ďalej upravovaný v rámci diplomovej práce. Aktuálnu verziu je možné nájsť na \url{https://github.com/CESNET/fedoralink}
 
 \subsubsection{FedoraObject}
 Aby bolo možné z objektami získanými z Fedory pracovať ako s objektami v Djangu, boli vytvorené triedy, ktoré s týmito objektami pracujú. Trieda FedoraObject je základnou triedou pre tieto objekty. S dátami získanými vo formáte RDF z Fedory umožňuje pracovať aj keď vopred nepoznáme štruktúru týchto dát.
@@ -538,6 +538,24 @@ Návrh zobrazenia pre dáta organickej chémie:
  	\caption[Zobrazenie detailu konkrétnej položky (Ethanolu)]{Zobrazenie detailu konkrétnej položky (Ethanolu)}\label{graphics:Ethanol}
 \end{figure}
 
+\section{Automatický import dát}
+Aby sme čo najviac zjednodušili vkladanie nových dát do repozitára, je potrebné upraviť niektorý z nástrojov na zber a organizáciu chemických dát, ktorý používajú výskumníci z Ústavu organickej chémie VŠCHT Praha. Pre účely diplomovej práce bol po dohode s výskumníkmi ako zdroj dát pre import vybraný nástroj Open Enventory.
+
+K importu dát má dôjsť po kliknutí na tlačítko umiestnené priamo v tejto webovej aplikácii. Aby bolo možné aplikáciu upraviť, je potrebné vedieť ako funguje, aké sú vzťahy medzi tabuľkami v databázi a nájsť vhodné umiestnenie pre tlačítko.
+Open Enventory je open source aplikácia, ktorá má k dispozícii všetky zdrojové kódy. Neexistuje k nej ale žiadna dokumentácia.
+
+Pri prechádzaní kódu aplikácie som naviac zistil, že veľká časť komentárov a aj časť samotného kódu sú napísané v nemčine. Databázová schéma taktiež nie je prehľadná, v jednotlivých tabuľkách nie sú označené cudzie kľúče a teda chýbajú prepojenia na iné tabuľky. Na stĺpcoch, ktoré by mali byť cudzími kľúčami sú len indexy.
+
+\subsection{Schéma databáze}
+Celá schéma databáze je na priloženom CD vo formáte UML aj SVG. V tejto časti sú popísané a okomentované databázové tabuľky, v ktorých sú uložené dáta, ktoré chceme importovať do repozitára alebo ich k tomuto importu potrebujeme.
+
+\begin{figure}\centering
+	\includegraphics[width=1.0\textwidth]{Schema_DB_Open_Enventory/lab_journal.png}
+ 	\caption[Štruktúra databázovej tabuľky lab\_journal]{Štruktúra databázovej tabuľky lab\_journal}\label{graphics:lab_journal}
+\end{figure}
+
+V databázovej tabuľke lab\_journal, ktorej štruktúra je na obrázku \ref{graphics:lab_journal} sú uložené základné údaje o laboratórnom denníku. Pre naše účely budú ďalej dôležité stĺpce person\_id a primárny kľúč lab\_journal\_id.
+
 
 \begin{conclusion}
 	%sem napíšte záver Vašej práce
@@ -556,6 +574,8 @@ Návrh zobrazenia pre dáta organickej chémie:
 	\item[XML] Extensible markup language
 	\item[RDF] Resource Description Format
 	\item[ACL] Access control list
+	\item[UML] Unified Modeling Language
+	\item[SVG] Scalable Vector Graphics
 \end{description}
 
 

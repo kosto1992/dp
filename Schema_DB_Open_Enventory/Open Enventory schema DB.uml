@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>b0bb4a05-10d4-4621-b5b3-539e768f58c1</OriginalElement>
+  <nodes>
+    <node x="5328.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction</node>
+    <node x="7408.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_chemical_storage_chemical_storage_type</node>
+    <node x="7380.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytical_data_image</node>
+    <node x="5144.0" y="2166.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_chemical_storage</node>
+    <node x="2494.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.db_info</node>
+    <node x="7926.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.author</node>
+    <node x="2151.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_accepted_order</node>
+    <node x="4714.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_institution</node>
+    <node x="881.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.person</node>
+    <node x="3132.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.other_db</node>
+    <node x="4099.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_cost_centre</node>
+    <node x="0.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.cache</node>
+    <node x="5139.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_gc_peak</node>
+    <node x="0.0" y="0.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule</node>
+    <node x="3318.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_db_info</node>
+    <node x="5623.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage_literature_archive</node>
+    <node x="5778.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_storage</node>
+    <node x="6702.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_property_archive</node>
+    <node x="1975.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytics_device</node>
+    <node x="1079.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytical_data</node>
+    <node x="6247.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_literature</node>
+    <node x="2085.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.supplier_offer</node>
+    <node x="4140.0" y="0.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_chemical_archive</node>
+    <node x="1671.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_person</node>
+    <node x="3818.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.predefined_permissions</node>
+    <node x="2455.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_chemical_storage_property</node>
+    <node x="7248.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule_names</node>
+    <node x="7024.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.lab_journal</node>
+    <node x="4742.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.gc_peak</node>
+    <node x="2219.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.project_person</node>
+    <node x="4406.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage_chemical_storage_type</node>
+    <node x="304.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_xy_data</node>
+    <node x="1396.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_rent</node>
+    <node x="1862.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage_type</node>
+    <node x="7612.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.xy_data</node>
+    <node x="713.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule_instructions</node>
+    <node x="3188.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_analytics_method</node>
+    <node x="4845.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage_literature</node>
+    <node x="1128.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytics_method</node>
+    <node x="6563.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.lab_journal_person</node>
+    <node x="5952.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.message</node>
+    <node x="2813.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_chemical_storage_type</node>
+    <node x="5211.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytics_device_permission</node>
+    <node x="1628.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_reaction_literature</node>
+    <node x="0.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.order_comp</node>
+    <node x="1732.0" y="2166.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_reaction_chemical</node>
+    <node x="3338.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule_type</node>
+    <node x="2699.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.sci_journal</node>
+    <node x="3775.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_project_literature</node>
+    <node x="1862.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.settlement</node>
+    <node x="6877.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.mat_stamm_nr</node>
+    <node x="5370.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_order</node>
+    <node x="6740.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.message_person</node>
+    <node x="3148.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.project_literature</node>
+    <node x="6115.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_literature_archive</node>
+    <node x="7090.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.literature</node>
+    <node x="708.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_author</node>
+    <node x="599.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_analytical_data_image</node>
+    <node x="0.0" y="2166.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_chemical</node>
+    <node x="6186.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_reaction</node>
+    <node x="0.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.rent</node>
+    <node x="2360.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule_type</node>
+    <node x="542.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_chemical_property</node>
+    <node x="5324.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.storage</node>
+    <node x="683.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule_molecule_type</node>
+    <node x="1656.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.gc_peak_archive</node>
+    <node x="3364.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_supplier_offer</node>
+    <node x="3790.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.global_settings</node>
+    <node x="6325.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.order_alternative</node>
+    <node x="4808.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_sci_journal</node>
+    <node x="2855.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.lock_table</node>
+    <node x="0.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_lab_journal</node>
+    <node x="6259.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_storage</node>
+    <node x="5548.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytical_data_image_archive</node>
+    <node x="998.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule_literature</node>
+    <node x="6472.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_property</node>
+    <node x="3674.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_retention_time</node>
+    <node x="4057.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.mpi_order</node>
+    <node x="4302.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.xy_data_archive</node>
+    <node x="7768.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_chemical_storage_chemical_storage_type</node>
+    <node x="0.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.accepted_order</node>
+    <node x="0.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_chemical_storage_literature</node>
+    <node x="1085.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule_names</node>
+    <node x="1938.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.institution_code</node>
+    <node x="5445.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_other_db</node>
+    <node x="4903.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_other_db</node>
+    <node x="0.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule_instructions</node>
+    <node x="2179.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.mpi_order_item</node>
+    <node x="5926.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule_literature</node>
+    <node x="2083.0" y="0.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule</node>
+    <node x="7223.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytics_type</node>
+    <node x="2469.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.self_kostensky</node>
+    <node x="3557.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.change_notify</node>
+    <node x="912.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_reaction_type</node>
+    <node x="416.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_analytics_type</node>
+    <node x="6839.0" y="2166.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.analytical_data_archive</node>
+    <node x="4344.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_archive</node>
+    <node x="6007.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_chemical_order</node>
+    <node x="3275.0" y="3892.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_analytical_data</node>
+    <node x="6557.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.project</node>
+    <node x="6889.0" y="7218.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_project</node>
+    <node x="4284.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_reaction_chemical_property</node>
+    <node x="2733.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_institution_code</node>
+    <node x="5998.0" y="0.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage_archive</node>
+    <node x="1313.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_molecule_molecule_type</node>
+    <node x="4295.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_analytics_device</node>
+    <node x="3034.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_project_person</node>
+    <node x="4039.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_molecule_property</node>
+    <node x="1460.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage_property</node>
+    <node x="3267.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_person</node>
+    <node x="7034.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_order_alternative</node>
+    <node x="7171.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.class</node>
+    <node x="2735.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.institution</node>
+    <node x="4806.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_mpi_order</node>
+    <node x="3743.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_mpi_order_item</node>
+    <node x="7692.0" y="6791.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_type</node>
+    <node x="2176.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.units</node>
+    <node x="7535.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_reaction_property</node>
+    <node x="0.0" y="4914.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.remote_literature</node>
+    <node x="3478.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.cost_centre</node>
+    <node x="3456.0" y="2166.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.chemical_storage</node>
+    <node x="5577.0" y="7580.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule_molecule_type</node>
+    <node x="360.0" y="7810.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.VIEW:enventory.dummy_lab_journal_person</node>
+    <node x="1408.0" y="5693.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule_property</node>
+    <node x="2556.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.retention_time</node>
+    <node x="1263.0" y="6275.0">b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.reaction_chemical_property_archive</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="252.5" y="168.0" />
+  <SelectedNodes>
+    <node>b0bb4a05-10d4-4621-b5b3-539e768f58c1.TABLE:enventory.molecule</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
