@@ -1,3 +1,5 @@
+https://is.muni.cz/th/172691/fi_m/dp.pdf
+
 https://docs.oracle.com/javaee/7/tutorial/jaxrs003.htm#GIPZZ - Java 7 tutorial pre JAX-RS
 http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html - tutorial s vyuzitim JAX-RS
 
