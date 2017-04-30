@@ -183,7 +183,7 @@
 
 		Beru na v\v edom\'\i{}, \v ze se na moji pr\'aci vztahuj\'\i{} pr\'ava a povinnosti vypl\'yvaj\'\i{}c\'\i{} ze z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, ve zn\v en\'\i{} pozd\v ej\v s\'\i{}ch p\v redpis{\r u}, zejm\'ena skute\v cnost, \v ze \v Cesk\'e vysok\'e u\v cen\'\i{} technick\'e v~Praze m\'a pr\'avo na uzav\v ren\'\i{} licen\v cn\'\i{} smlouvy o~u\v zit\'\i{} t\'eto pr\'ace jako \v skoln\'\i{}ho d\'\i{}la podle \S{}~60 odst.~1 autorsk\'eho z\'akona.
 		}\else\if\@lang2{%
-		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
+		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval samostatne a \v ze som uviedol v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
 		Beriem na vedomie, \v ze sa na moju pr\'acu vz\v tahuj\'u pr\'ava a povinnosti vypl\'yvaj\'uce zo~z\'akona \v c.~121/2000~Sb., autorsk\'eho z\'akona, v znen\'\i\ neskor\v s\'\i ch predpisov,  a~skuto\v cnos\v t, \v ze \v Cesk\'e vysok\'e u\v cen\'\i{} technick\'e v~Praze m\'a pr\'avo na uzavrenie licen\v cnej zmluvy o~pou\v zit\'\i\ tejto pr\'ace ako \v skolsk\'eho diela pod\v la \S{}~60 odst.~1 autorsk\'eho z\'akona.
 		}\else{%
