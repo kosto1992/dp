@@ -66,7 +66,7 @@ Existujú rôzne dátové repozitáre, teda software, ktorý sa stará o ukladan
 
 Repozitár, ku ktorému mám v rámci diplomovej práce vytvoriť moduly, má byť zameraný na vedecké dáta. Aby výskumníci repozitár používali, je potrebné, aby bolo vkladanie dát jednoduché a pohodlné. Tiež je cieľom vytvoriť jednotlivé súčasti tak, aby boli čo najvšeobecnejšie a použiteľné pre rôzne skupiny vedcov.
 
-Pokúsim sa teda vytvoriť moduly a nástroje, ktoré umožnia prácu s rôznymi typmi dát a tiež nástroje, ktoré zjednodušia proces vkladania nových dát do repozitára.
+Vytvorím teda moduly a nástroje, ktoré umožnia prácu s rôznymi typmi dát a tiež nástroje, ktoré zjednodušia proces vkladania nových dát do repozitára.
 \end{introduction}
 
 \chapter{Popis problému}
@@ -224,7 +224,7 @@ Umožňuje verziovanie uložených dát.
 Open Source
 
 
-\section{Nástroje na zber a organizáciu chemických dát}
+\section{Nástroje na zber a organizáciu chemických dát}\label{ELN}
 Výskumníci v oblasti chémie si vedú laboratórne denníky so záznamami hypotéz, experimentov, analýz alebo interpretáciou experimentov. V súčasnosti sa denníky vedú v elektronickej forme s využitím elektronických laboratórnych denníkov (často sa pre tento software používa skratka ELN). Keďže Ústav organickej chémie VŠCHT Praha používa a naďalej chce používať len E-Notebook a Open Enventory, iné nástroje na zber a organizáciu chemických dát v prehľade neuvádzam.
 
 Prehľad programov, ktoré používa Ústav organickej chémie VŠCHT Praha:
@@ -237,15 +237,15 @@ Pri prechádzaní kódu aplikácie som naviac zistil, že veľká časť koment�
 
 Využíva MySQL databázu. Databázová schéma taktiež nie je prehľadná, v jednotlivých tabuľkách nie sú označené cudzie kľúče, a teda chýbajú prepojenia na iné tabuľky. Na stĺpcoch, ktoré by mali byť cudzími kľúčmi, sú len indexy.
 
-\chapter{Analýza a návrh riešenia}
-\section{Analýza požiadaviek}
+
+\chapter{Analýza požiadaviek}
 CESNET, z.s.p.o. bol oslovený Ústavom organickej chémie VŠCHT Praha, ktorý potrebuje vyriešiť ukladanie a sprístupnenie vlastných dát - chemické vzorce, reakcie, analýzy nameraných dát. Nad jedným datasetom môže pracovať viacero výskumníkov, niektorí dáta namerali, iní ich analyzujú alebo každý člen tímu pracujúci na jednom projekte rieši iné merania a experimenty. Výskumník teda okrem vlastných dát potrebuje mať prístup aj k dátam ostatných ľudí v tíme. Nie všetky dáta môžu byť zverejnené, na niektoré výskumy môže platiť embargo a majú byť zverejnené až neskôr, k dátam, s ktorými sa aktuálne pracuje, majú mať prístup len členovia tímu alebo dáta ich autor nechce zverejniť z iných dôvodov. Pre tieto dáta taktiež potrebujú vyriešiť zálohovanie.
 
 Ako sa postupne zistilo, o vyriešenie ukladania a sprístupnenia dát má záujem viacero rôznych a na rôzne dáta zameraných skupín. Preto chceme vytvoriť repozitár, ktorý bude jednoduché rozšíriť pre užívateľov používajúcich iné typy dát a metadát.
 
 CESNET v rámci služieb DataCare poskytuje dátové úložisko s celkovou hrubou kapacitou presahujúcou 21 PB. Toto úložisko poskytuje dátový priestor na zálohovanie, archiváciu, zdieľanie dát. \cite{DataCare} Úložisko dát umožňuje ukladať dáta tak, aby boli prístupné len pre jednu osobu alebo zdieľané pre skupinu ľudí. \cite {DatoveUloziste} CESNET teda má vytvorené zázemie, ktoré bude možné využiť pre potreby repozitára.
 
-\subsection{Funkčné požiadavky}
+\section{Funkčné požiadavky}
 
 Ústav organickej chémie VŠCHT Praha v súčasnosti využíva aplikácie pre tvorbu laboratórnych denníkov, v ktorých sú uložené informácie o chemických prvkoch, reakciách, ktoré počas pokusu nastali, taktiež o priebehu meraní a pokusov. Aby bola využiteľnosť repozitára čo najlepšia a práca s ním čo najjednoduchšia, požadujú možnosť importovať dáta z aplikácie Open Enventory, v ktorej si vedú laboratórne denníky, do repozitára. 
 
@@ -260,14 +260,14 @@ Projekty v rámci laboratórnych denníkov obsahujú:
 			\item NMR spektrá (spektrá nukleárnej magnetickej rezonancie) chemických prvkov,
 			\item IR (infračervené) spektrá,
 			\item hmotnostné spektrá,
-			\item pri chemických prvkoch je potrebné evidovať:
+			\item pri chemických zlúčeninách je potrebné evidovať:
 				\begin{itemize}
-					\item štandardný názov prvku,
+					\item štandardný názov zlúčeniny,
 					\item zápis štruktúry,
 					\item obrázok štruktúry,
-					\item chemický vzorec prvku,
+					\item chemický vzorec zlúčeniny,
 					\item molekulárnu hmotnosť,
-					\item hmotnosť prvku,
+					\item hmotnosť zlúčeniny,
 					\item koncentráciu.
 				\end{itemize}
 		\end{itemize}
@@ -287,23 +287,23 @@ Prístup k jednotlivým dokumentom a poliam ale môže byť limitovaný. Vytvár
 
 Aplikácia Open Eventory musí byť upravená tak, aby umožnila export dát vo formáte vhodnom pre import do repozitára.
 
-\subsection{Požiadavky na vlastnosti repozitára}
+\section{Požiadavky na vlastnosti repozitára}
 \begin{itemize}
 	\item Repozitár bude pre užívateľov dostupný ako webová aplikácia.
 	\item Repozitár musí umožniť ďalšie rozšírenie pre iné typy dát.
 	\item Repozitár bude napojený na služby CESNETu.
 \end{itemize}
 
-\subsection{Administračné rozhranie}
+\section{Administračné rozhranie}\label{AdministracneRozhranie}
 Aby bolo možné spravovať kolekcie, oprávnenia pre prístup, užívateľov priamo v aplikácii, je potrebné vytvoriť v repozitári administračné rozhranie. Implementácia tohto rozhrania ale nie je súčasťou tejto diplomovej práce. 
 
 Kým administračné rozhranie nie je vytvorené, je nutné HTML šablóny pre kolekcie a rôzne typy dokumentov, oprávnenia pre prístup k dokumentom vytvárať a do Fedory ukladať manuálne. Pre zjednodušenie a testovanie sme vytvorili skript, ktorý umožňuje uloženie HTML šablón a ich priradenie rôznym typom dát. A tiež skript, ktorý umožňuje priradenie oprávnení.
 
-\section{Výber technológií}
-\subsection{Výber repozitára}
+\chapter{Výber technológií}
+\section{Výber repozitára}
 Keďže ani jeden existujúci repozitár nespĺňa všetky požiadavky alebo nevie uložiť/zobraziť dáta pre Ústav organickej chémie VŠCHT Praha, bolo potrebné vytvoriť nový alebo upraviť jestvujúci software. Vytvorenie nového softwaru od základov by bolo neefektívne. Vyššie zmienené repozitáre fungujú, niektoré ich časti by teda boli programované nanovo. Zvolená bola možnosť doplniť/upraviť funkčnosť existujúceho repozitára. Keďže zadávateľ preferuje open source riešenia, vyberali sme vhodný repozitár z open source repozitárov.
 
-Okrem toho boli pri výbere vhodného repozitára do úvahy brané ďalšie kritériá, a to možnosť použitia viacerých metadátových schém, programovací jazyk, podpora komunity. Do finálneho výberu sa dostali DSpace a Fedora. Z testov, ktoré sme pri výbere repozitára previedli, vyplynulo, že sú oba repozitáre podobne výkonné. Vyhľadávanie v metadátach bude naviac zabezpečené samostatnou aplikáciou. Oba zvládajú milióny záznamov \cite{Fedora} \cite[s.~213]{DigitalLibrary}.
+Okrem toho boli pri výbere vhodného repozitára do úvahy brané ďalšie kritériá, a to možnosť použitia viacerých metadátových schém, programovací jazyk, podpora komunity. Do finálneho výberu sa dostali DSpace a Fedora. Pri výbere bola vytvorená sada testov, ktorá skúšala do repozitára vkladať dáta (pdf súbory) s rôznov úrovňou zanorenia do kolekcií, pričom v každej kolekcii bol uložený iný počet dokumentov a podkolekcií. Pri ukladaní bol dôležitý čas, ktorý repozitár potrebuje na vloženie jedného dokumentu a tiež čas na vloženie definovaného počtu dokumentov. Z testov, ktoré sme pri výbere repozitára previedli, vyplynulo, že sú oba repozitáre podobne výkonné. Vyhľadávanie v metadátach bude naviac zabezpečené samostatnou aplikáciou. Oba zvládajú milióny záznamov \cite{Fedora} \cite[s.~213]{DigitalLibrary}.
 
 Vďaka návrhu Fedory je pridávanie rozšírení do tohto softwaru jednoduchšie, taktiež už má vyriešené verziovanie uložených dát. DSpace má k dispozícii webové užívateľské rozhranie, ktoré je možné upravovať a ďalej rozširovať. Fedora používa jednoduché webové rozhranie, ktoré umožňuje len základnú prácu s dátami. Vytvorenie samostatného, nového webového užívateľského rozhrania s využitím RESTapi je ale jednoduchšie než úprava jadra DSpace, aby zvládal verziovanie uložených dát.
 
@@ -326,21 +326,21 @@ Prístupové práva je taktiež možné nastaviť pomocou RDF priamo v existujú
  	\caption[Zobrazenie dát vo webovom rozhraní Fedory]{Zobrazenie dát vo webovom rozhraní Fedory}\label{graphics:fedora}
 \end{figure}
 
-\subsection{Výber aplikácie na vyhľadávanie}
+\section{Výber aplikácie na vyhľadávanie}
 Na vyhľadávanie v repozitári bude použitá samostatná aplikácia. Synchronizáciu dát s Fedorou zabezpečuje medzivrstva, ktorá komunikuje s oboma aplikáciami. Potrebujeme teda aplikáciu na vyhľadávanie v textových metadátach, ktorá je čo najrýchlejšia a zvláda veľké množstvo (milióny) záznamov.
 
 Keďže zadávateľ preferuje open source, pri výbere sme sa rozhodovali medzi týmito najrozšírenejšími vyhľadávacími aplikáciami:
-\subsubsection{ElasticSearch \url{https://www.elastic.co/products/elasticsearch}}
+\subsection{ElasticSearch \url{https://www.elastic.co/products/elasticsearch}}
 
 ElasticSearch je distribuovaný, RESTful vyhľadávací a analytický software. Umožňuje veľmi rýchle vyhľadávanie v indexovaných dátach. Dopyty je možné posielať s využitím RESTful api a JSONu, knižnice sú dostupné pre rôzne programovacie jazyky vrátane Pythnu a Javy. Podľa \cite{NajpouzivanejsieVyhladavace} ide o najrozšírenejší vyhľadávací engine.
 
-\subsubsection{Solr \url{http://lucene.apache.org/solr/}}
+\subsection{Solr \url{http://lucene.apache.org/solr/}}
 
 Solr je taktiež RESTful vyhľadávací software s podporou pre dáta vo formáte JSON, XML, CSV alebo binárnych dát cez HTTP.
 
 Obe vyhľadávacie aplikácie vychádzajú z jadra Apache Lucene, čo je vysokovýkonná, plnohodnotná, v texte vyhľadávacia knižnica napísaná v Jave. Umožňuje full-textové vyhľadávanie v dokumentoch. \url{http://lucene.apache.org/core/}
 
-\subsubsection{Porovnanie vyhľadávacích aplikácií}
+\subsection{Porovnanie vyhľadávacích aplikácií}
 V tabuľke \ref{tab:searchEngines} je porovnanie vlastností, ktoré rozhodovali pri výbere vyhľadávacieho enginu.
 
 \begin{table}[!htbp]\centering
@@ -357,19 +357,24 @@ Vzťah rodič-potomok & Nie & Áno \\ \hline
 \end{tabularx}
 \end{table}
 
-Ak napríklad máme v repozitári uložený dokument, kde sú 2 autori, prvý s krstným menom \uv{Ján} a priezviskom \uv{Svoboda} a druhý s krstným menom \uv{Martin} a priezviskom \uv{Novák}, pričom chceme vyhľadať dokument, kde je autor s krstným menom \uv{Ján} a priezviskom \uv{Novák}, Solr medzi výsledkami vráti nesprávne aj tento dokument. Elasticsearch, vďaka vnoreným dokumentom správne vyhodnotí, že tento dokument nemá autora \uv{Ján Novák} a dokument medzi výsledkami nezobrazí.
+Ak napríklad máme v repozitári uložený dokument, kde sú v poli \uv{Autori} uložený 2 autori, prvý s krstným menom \uv{Ján} a priezviskom \uv{Svoboda} a druhý s krstným menom \uv{Martin} a priezviskom \uv{Novák}, pričom chceme vyhľadať dokument, kde je autor s krstným menom \uv{Ján} a priezviskom \uv{Novák}, Solr medzi výsledkami vráti nesprávne aj tento dokument. Elasticsearch, vďaka vnoreným dokumentom správne vyhodnotí, že tento dokument nemá autora \uv{Ján Novák} a dokument medzi výsledkami nezobrazí. To je dané spôsobom, akým si dáta uloží Solr a Elasticsearch, spôsob uloženia týchto dát je zobrazený na obrázku \ref{graphics:solr_vs_elastic}.
 
-Vnorené dokumenty a možnosť vyhľadávať rodičov, ktorých deti spĺňajú špecifikovanú podmienku a opačne vyhľadávať potomkov, ktorých rodičia spĺňajú špecifikovanú podmienku, viedli k tomu, že je v repozitári použitý ElasticSearch ako vyhľadávací software. Medzivrstva ale umožňuje pracovať aj s aplikáciou Solr.
+\begin{figure}\centering
+	\includegraphics[width=0.6\textwidth]{diagramy/Solr_vs_Elasticsearch.pdf}
+ 	\caption[Uloženie dát v Solr a vnorené dokumenty v Elasticsearch]{Uloženie dát v Solr a vnorené dokumenty v Elasticsearch}\label{graphics:solr_vs_elastic}
+\end{figure}
 
-\subsection{Výber programovacieho jazyka a frameworku pre vytvorenie užívateľského rozhrania}
-Na vývoji repozitára pracuje viacero ľudí, každý ovláda a preferuje iné jazyky. Keďže sme sa rozhodli využiť Fedoru ako repozitár dát a implementovať vlastné webové rozhranie, bolo potrebné určiť programovací jazyk, v akom má byť toto rozhranie naprogramované.
+Vnorené dokumenty a možnosť vyhľadávať rodičov, ktorých deti spĺňajú špecifikovanú podmienku a opačne vyhľadávať potomkov, ktorých rodičia spĺňajú špecifikovanú podmienku, viedli k tomu, že je v repozitári použitý ElasticSearch ako vyhľadávací software.
 
-Po dohode bol zvolený programovací jazyk Python \url{https://www.python.org/} pre vytvorenie webového rozhrania a framework Django \url{https://www.djangoproject.com/}, ktorý by mal prácu uľahčiť.
+\section{Výber programovacieho jazyka a frameworku pre vytvorenie užívateľského rozhrania}
+Na vývoji repozitára pracuje viacero ľudí, každý ovláda a preferuje iné jazyky. Keďže sme sa rozhodli využiť Fedoru ako repozitár dát a implementovať vlastné webové rozhranie, bolo potrebné určiť programovací jazyk, v akom má byť toto rozhranie naprogramované. Mgr. Miroslav Šimek, ktorý vytváral repozitár záverečných prác na VŠCHT Praha, má najväčšie skúsenosti s vývojom aplikácií v Pythone s využitím frameworku Django. Väčšina webových služieb, ktoré má na VŠCHT na starosti oddelenie CIS (Centrum informačných služieb) a práve Mgr. Miroslav Šimek, využíva Python a framework Django.
 
-\subsubsection{Python}
+Po dohode bol zvolený práve programovací jazyk Python \url{https://www.python.org/} pre vytvorenie webového rozhrania a framework Django \url{https://www.djangoproject.com/}, ktorý by mal prácu uľahčiť.
+
+\subsection{Python}
 Python je interpretovaný programovací jazyk vyššej úrovne. Obsahuje efektívne dátové štruktúry a umožňuje jednoduchý, ale efektívny prístup k objektovo-orientovanému programovaniu. \cite{Python}
 
-\subsubsection{Django}
+\subsection{Django}
 Django je webový framework pre Python. Na prvý pohľad na fungovanie Djanga sa zdá, že využíva návrhový vzor MVC (Model-view-controller), \mbox{avšak} kontrolérom nazveme v prípade Djanga \uv{view} a view podľa vzoru MVC \uv{template}. V Django interpretácii vzoru MVC ale \uv{view} popisuje dáta, ktoré sú zobrazené užívateľovi. Pritom nie je dôležité, ako sa dáta zobrazia, podstatné je, ktoré dáta budú zobrazené.
 
 Obsah dát je oddelený od prezentácie dát. K prezentácii sú využívané šablóny (\uv{template}), ktoré definujú, ako sú dáta zobrazené.
@@ -389,9 +394,13 @@ A ak beží webová aplikácia na localhoste, po pokuse o zobrazenie URL adresy 
 
 V prípade Djanga sa namiesto MVC návrhového vzoru používa skôr označenie MTV (Model-template-view), ktoré presnejšie popisuje to, ako funguje Django. \cite{DjangoFAQ}
 
-Model je klasická dátová vrstva, ktorá obsahuje logiku potrebnú pre prácu s dátami.
+\label{datovaVrstva}Model (trieda) je klasická dátová vrstva, ktorá obsahuje logiku potrebnú pre prácu s dátami. Modely využívajú techniku ORM (object-relational mapping) a umožňujú tak pracovať s dátami získanými z relačných databáz. Tieto triedy dedia z Django triedy Model (django.db.models.Model). Vo všeobecnosti sa každý model mapuje na jednu databázovú tabuľku. V modely sú definované polia, ktoré sa mapujú na jednotlivé stĺpce v databáze. Medzi jednotlivými modelmi sú definované vzťahy, rovnaké aké sú medzi tabuľkami v databáze.
 
-\chapter{Implementácia}
+Ďalšie metadáta, ktoré chceme mať v triede uložené, ale nie sú to stĺpce v tabuľke, môžeme môžeme uložiť do vnútornej triedy \uv{Meta}. 
+
+Každý model môže mať definované metódy. Model má zdedené metódy ako save() a delete(), tie je možné v prípade potreby predefinovať. Tiež je možné dediť od iného modelu alebo modelov. \cite{DjangoModels}
+
+\chapter{Návrh a implementácia}
 \section{Návrh aplikácie}
 \begin{figure}\centering
 	\includegraphics[width=1.0\textwidth]{diagramy/Architektura_repozitara.pdf}
@@ -402,9 +411,9 @@ Ako backend repozitára je použitá Fedora. Pre zjednodušenie práce s oprávn
 
 Fedora síce umožňuje definíciu prístupových práv (ACLs, z angličtiny Access Control Lists teda zoznamy prístupových práv), ale stavy nepoužíva. Je ju preto potrebné upraviť tak, aby s týmito stavmi vedela pracovať (kontrolovať prechody medzi stavmi). To zabezpečí modul State engine, ktorý upraví kód Fedory.
 
-Oprávnenia chceme nastavovať nielen pre konkrétnych užívateľov, ale aj pre rôzne skupiny, do ktorých užívatelia patria. Zároveň sme pri návrhu repozitára mysleli na možnosť prihlásenia cez rôzne autorizačné služby ako je Shibboleth (\url{https://shibboleth.net/}) alebo Perun (\url{https://perun.cesnet.cz}). Využijeme štandardnú On-Behalf-Of HTML hlavičku, s ktorou vie pracovať Fedora a vlastnú On-Behalf-Of-Django-Groups hlavičku. Pre spracovanie tejto hlavičky je nutné do Fedory doplniť autorizačný modul (Fedora\_group\_plugin), ktorý bude súčasťou Fedory.
+Oprávnenia chceme nastavovať nielen pre konkrétnych užívateľov, ale aj pre rôzne skupiny, do ktorých užívatelia patria. Zároveň sme pri návrhu repozitára mysleli na možnosť prihlásenia cez rôznych poskytovateľov identity ako je Shibboleth (\url{https://shibboleth.net/}) alebo Perun (\url{https://perun.cesnet.cz}). Využijeme štandardnú On-Behalf-Of HTML hlavičku, s ktorou vie pracovať Fedora a vlastnú On-Behalf-Of-Django-Groups hlavičku. Pre spracovanie tejto hlavičky je nutné do Fedory doplniť autorizačný modul (Fedora\_group\_plugin), ktorý bude súčasťou Fedory.
 
-Užívateľské rozhranie chceme vytvoriť s využitím programovacieho jazyka Python a frameworku Django. Pre možnosť vytvorenia rôznych užívateľských rozhraní pre rôzne používateľské skupiny (ktoré potrebujú pracovať s inými dátami a metadátami) boli vytvorené medzivrstvy Fedoralink a Fedoralink\_ui. Fedoralink má na starosť komunikáciu s Fedorou a Elasticsearchom s využitím REST api. Umožňuje pracovať s dokumentmi získanými z Fedory ako s Django objektmi. Django objekt je inštancia nejakej triedy, s ktorou je možné pracovať podľa definovaných štandardov frameworku Django. Fedoralink dokáže metadáta podľa ich typu získavať z Elasticsearch alebo z Fedory. S využitím Elasticsearch aplikácia taktiež môže v repozitári vyhľadávať.
+Užívateľské rozhranie chceme vytvoriť s využitím programovacieho jazyka Python a frameworku Django. Pre možnosť vytvorenia rôznych užívateľských rozhraní pre rôzne používateľské skupiny (ktoré potrebujú pracovať s inými dátami a metadátami) boli vytvorené medzivrstvy Fedoralink a Fedoralink\_ui. Fedoralink má na starosti komunikáciu s Fedorou a Elasticsearchom s využitím REST api. Umožňuje pracovať s dokumentmi získanými z Fedory ako s Django objektmi. Django objekt je inštancia nejakej triedy, s ktorou je možné pracovať podľa definovaných štandardov frameworku Django. Fedoralink dokáže metadáta podľa ich typu získavať z Elasticsearch alebo z Fedory. S využitím Elasticsearch aplikácia taktiež môže v repozitári vyhľadávať.
 
 V prípade webových aplikácií často používame rovnaký kód pre zobrazenie rôznych dokumentov, formuláre pre vytváranie nových dokumentov a ich úpravy. Django preto používa views (zobrazenia) založené na triedach. Ide o skupinu tried, ktoré nahradzujú funkcie pre zobrazenia, zjednodušujú prácu a zlepšujú znovupoužiteľnosť kódu pri najčastejšie používaných typoch zobrazení. Na HTTP požiadavok pošlú odpoveď, pričom doplnia dáta do správnych šablón. Vďaka takýmto triedam nie je nutné mať rovnaký kód na viacerých miestach aplikácie.\cite{DjangoClassBasedViews}
 
@@ -452,6 +461,9 @@ Ako už bolo zmienené v predchádzajúcej kapitole, ako backend pre repozitár 
 
 Metadáta vo Fedore sú uložené s využitím RDF (Resource Description Framework), teda ako trojice - subjekt, predikát a objekt.
 
+\subsubsection{Ukladanie dát vo Fedore}
+\label{UkladanieDatFedora}Fedora využíva hierarchickú štruktúru ukladania dát. Dokumenty vo Fedore sú uložené buď ako kolekcie alebo binárne dáta (bitstream). Dokument, ktorý je typu kolekcia, môže mať pod sebou uložené ďalšie dokumenty. Vzniká teda hierarchická štruktúra, ktorá začína koreňom repozitára. Prístup k jednotlivým dokumentom vo Fedore je možný priamo, ak vieme jeho id (nazývaný \uv{slug}). Tento slug môžeme pri vytváraní nového dokumentu navrhnúť, avšak Fedora môže uložiť dokument s iným slugom a ten vrátiť. Ak id dokumentu nepoznáme, musíme prechádzať dokumenty od koreňa repozitára.
+
 \subsection{State engine}
 Pre možnosť využívania stavov bude nutné rozšíriť Fedoru o tento modul. Modul rieši prechody medzi stavmi, zmenu stavov, zmenu kontroléru stavov, konkrétnu operáciu povolí len oprávneným osobám. Oprávnené osoby sú určené pomocou ACL. Keďže návrh dátového formátu pre popis stavov pracujúcich s prístupovými právami nadväzujúcimi na štandard W3C WebAccessControl a implementácia tohto modulu boli uvedené ako časť zadania, podrobnejšie sa tomuto modulu venujem v samostatnej sekcii \ref{stavy}.
 
@@ -462,7 +474,7 @@ Samotná Fedora s webac umožňuje overenie autorizácie na základe štandardne
 
 Fedora musí bežať pod Java Servlet kontajnerom (Tomcat, GlassFish, Jetty...), autentizáciu rieši s využitím týchto kontajnerov. Užívateľské údaje sú definované v nastavení kontajneru. Pri pridávaní nového užívateľa by teda bolo potrebné zmeniť nastavenie Java Servlet kontajnera. Zmena týchto nastavení sa väčšinou prejaví až po reštarte kontajnera. Užívateľov by sme museli mať definovaných v aplikácii, ktorá sa stará o webové rozhranie, aby sa užívateľ mohol prihlásiť a pridávať nové dáta, v nastavení Java Servlet kontajnera a taktiež v definicii prístupových práv priamo vo Fedore, aby bolo možné riešiť autorizáciu.
 
-S využitím On-Behalf-Of hlavičky je možné požiadavky na Java Servlet kontajner prevádzať stále pod jedným užívateľom (FedoraAdmin) ale Fedora už užívateľa autorizuje na základe užívateľského mena uvedeného v On-Behalf-Of hlavičke.
+\label{On-Behalf-Of}S využitím On-Behalf-Of hlavičky je možné požiadavky na Java Servlet kontajner prevádzať stále pod jedným užívateľom (FedoraAdmin) ale Fedora už užívateľa autorizuje na základe užívateľského mena uvedeného v On-Behalf-Of hlavičke.
 
 Podobne ako užívatelia sú aj skupiny v Java Servlet kontajneroch definované v ich nastaveniach. Fedora však nemá implementáciu pre využitie žiadnej HTTP hlavičky, ktorá by umožňovala impersonifikáciu na nejakú skupinu. Rozšírenie Fedora\_group\_plugin umožňuje autorizáciu na základe On-Behalf-Of-Django-Groups hlavičky, o ktoré sa stará DjangoGroupPrincipalProvider. Skupinu teda stačí mať uloženú v databáze webovej aplikácie, kde ich ukladá Django.
 
@@ -477,13 +489,13 @@ Plugin je súčasťou git repozitára fedoralinku. Autorom tohto pluginu je Mgr.
 Aplikácia, ktorá umožňuje rýchle vyhľadavánie v metadátach.
 
 \subsection{Fedoralink}
-Ako je spomenuté vyššie, framework Django obsahuje logiku pre prístup k dátam. K tomu sa využívajú modely - teda triedy, ktoré využívajú techniku ORM (object-relational mapping) a umožňujú tak pracovať s dátami získanými z relačných databáz. Relačné databázy sú navrhnuté tak, aby umožňovali efektívne ukladanie dát ale taktiež selekciu a získavanie dát (teda vyhľadávanie v dátach).
+Ako je spomenuté vyššie \ref{datovaVrstva}, framework Django obsahuje logiku pre prístup k dátam. K tomu sa využívajú modely, ktoré umožňujú pracovať s dátami získanými z relačných databáz. Relačné databázy sú navrhnuté tak, aby umožňovali efektívne ukladanie dát ale taktiež selekciu a získavanie dát (teda vyhľadávanie v dátach).
 
-Repozitáre sú však navrhnuté pre ukladanie dát. Prístup k jednotlivým dokumentom vo Fedore je možný priamo, ak vieme jeho id (nazývaný \uv{slug}). Tento slug môžeme pri vytváraní nového dokumentu navrhnúť, avšak Fedora môže uložiť dokument s iným slugom a ten vrátiť. Ak id dokumentu nepoznáme, musíme prechádzať dokumenty od koreňa repozitára. Preto využívame pre indexovanie dát a vyhľadávanie samostatnú aplikáciu Elasticsearch.
+Repozitáre sú však navrhnuté pre ukladanie dát. Keďže Fedora využíva hierarchickú štruktúru pre ukladanie dát a prístup k nim je možný napriamo cez id alebo je nutné prehľadávať celý strom od koreňa (\ref{UkladanieDatFedora}), využívame pre indexovanie dát a vyhľadávanie samostatnú aplikáciu Elasticsearch.
 
-Programátori, ktorí používajú Django, sú zvyknutí na využívanie modelov pre prístup k dátam. Django neumožňuje napojenie na Fedoru a Elasticsearch rovnako ako na relačnú databázu. Chceli sme ale zachovať pre programátorov rovnaký prístup k dátam. Preto vznikla medzivrstva Fedoralink. Aplikácia je rozhranie, ktoré umožňuje prácu s Fedorov a Elasticsearchom. Modely umožňujú ukladanie dát do Fedory, získanie dokumentov priamo cez id, ale aj vyhľadávanie s využitím Elasticsearch. Navonok tieto modely vyzerajú ako klasické Django modely.
+Programátori, ktorí používajú Django, sú zvyknutí na využívanie modelov pre prístup k dátam. Keďže Fedora ani Elasticsearch nie sú relačné databázy, Django k nim nevie pristupovať rovnakým spôsobom. Chceli sme ale zachovať pre programátorov rovnaký prístup k dátam. Preto vznikla medzivrstva Fedoralink. Aplikácia je rozhranie, ktoré umožňuje prácu s Fedorov a Elasticsearchom. Fedoralink simuluje relačnú databázu nad Fedorou a Elasticsearchom. Modely umožňujú ukladanie dát do Fedory, získanie dokumentov priamo cez id, ale aj vyhľadávanie s využitím Elasticsearch. Navonok tieto modely vyzerajú ako klasické Django modely.
 
-Aplikácia pôvodne vznikla pre potreby repozitára záverečných prác VŠCHT Praha, v programovacom jazyku Python s využitím frameworku Django. Autorom fedoralinku je Mgr. Miroslav Šimek. Fedoralink bol počas vývoja repozitára ďalej upravovaný v rámci diplomovej práce. Riešil som úpravy, ktoré boli nutné pri prechode na Elasticsearch vo verzii 5.0, opravu drobných chýb, časť úprav potrebných pre umožnenie autentifikácie cez On-Behalf-Of HTTP hlavičky. Aktuálnu verziu je možné nájsť na \url{https://github.com/CESNET/fedoralink}
+Aplikácia pôvodne vznikla pre potreby repozitára záverečných prác VŠCHT Praha, v programovacom jazyku Python s využitím frameworku Django. Autorom fedoralinku je Mgr. Miroslav Šimek. Fedoralink bol počas vývoja repozitára ďalej upravovaný v rámci diplomovej práce. Riešil som úpravy, ktoré boli nutné pri prechode na Elasticsearch vo verzii 5.0, opravu drobných chýb, časť úprav potrebných pre umožnenie autentifikácie cez On-Behalf-Of HTTP hlavičky (\ref{On-Behalf-Of}). Aktuálnu verziu je možné nájsť na \url{https://github.com/CESNET/fedoralink}
 
 \subsubsection{FedoraObject}
 Aby bolo možné s dokumentmi získanými z Fedory pracovať ako s objektmi v Djangu, boli Mgr. Miroslavom Šimkom vytvorené triedy, ktoré s týmito dokumentmi pracujú. Trieda FedoraObject je základnou triedou pre tieto objekty. Umožňuje pracovať s dátami získanými vo formáte RDF z Fedory, aj keď vopred nepoznáme štruktúru týchto dát.
@@ -496,7 +508,7 @@ obj[DC.title]
 
 Z objektu môžeme získať jeho ID, URL identifikátor (slug), jeho potomkov, objekt uložiť späť do Fedory alebo ho zmazať.
 
-Dokument vo Fedore môže byť typu container alebo bitstream. V druhom prípade môže mať k sebe priradený súbor. Preto aj táto trieda FedoraObject umožňuje prácu so získaným bitstreamom, a to pomocou funkcie get\_bitstream.
+Dokument vo Fedore môže byť typu kontajner alebo bitstream (\ref{UkladanieDatFedora}). V druhom prípade môže mať k sebe priradený súbor. Preto aj táto trieda FedoraObject umožňuje prácu so získaným bitstreamom, a to pomocou funkcie get\_bitstream.
 
 \subsubsection{IndexableFedoraObject}
 Rozširuje triedu FedoraObject. Ak využívame túto triedu, o schéme metadát musíme vedieť ďalšie informácie. Vieme, akého typu sú jednotlivé metadátové polia (napr. či ide o reťazec, pole, ktoré môže byť vo viacerých jazykoch alebo o dátum...).
@@ -602,7 +614,7 @@ Modul Fedoralink\_ui, ktorý som vytvoril, zjednodušuje prácu so šablónami. 
 
 Pre rôzne typy dát môžu byť v repozitári uložené rôzne šablóny, pre zobrazenie, vytvorenie alebo editáciu dokumentu. Tiež šablóny, ktoré určujú ako sa má dokument zobraziť vo výpise dokumentov v rámci kolekcie alebo pri vyhľadávaní. Pre jednotlivé typy polí môžu byť taktiež vytvorené a do Fedory uložené rôzne šablóny. Ak nie je šablóna pre daný typ dokumentu uložená ani vo Fedore ani priamo v kóde aplikácie, Fedoralink\_ui sa pokúsi zobraziť aspoň základné informácie s využitím predvolených šablón. 
 
-Modul využíva fedoralink pre komunikáciu s Fedorou a Elasticsearchom a je súčasťou git repozitára fedoralinku.
+Modul využíva fedoralink pre komunikáciu s Fedorou a Elasticsearchom a je súčasťou git repozitára fedoralinku (\url{https://github.com/CESNET/fedoralink}).
 
 \subsubsection{Mapovanie generických URL adries}
 Aby nebolo nutné do aplikácie pridávať nové pravidlá pre URL adresy pri každom vytvorení novej kolekcie, mám vytvorené pravidlá pre všeobecné URL adresy a kód, ktorý zabezpečí zobrazenie dokumentov v správnej šablóne.
@@ -700,31 +712,27 @@ Návrh zobrazenia pre dáta organickej chémie je na obrázkoch \ref{graphics:li
 \end{figure}
 
 \section{Zobrazovanie chemických dát}
-Technológie, ktoré máme vybrané, Fedora a Elasticsearch, umožňujú ukladanie dát a vyhľadávanie v dátach. Fedora tiež poskytuje základné webové užívateľské rozhranie, ktoré umožňuje vytváranie nových dokumentov, zobrazenie a úpravu existujúcich. Toto webové rozhranie ale nie je užívateľsky prívetivé, taktiež je potrebné zobrazovať aj dáta v inej než textovej podobe (napríklad grafy, obrázky, štruktúru chemických látok,...), je preto potrebné vytvoriť nové webové rozhranie, ktoré umožní prácu s dokumentmi v repozitári.
+Dáta, ktoré sú uložené v repozitári musí aplikácia vedieť zobraziť. Ak napríklad máme kolekciu, ktorá obsahuje výsledky meraní, chcem vo výpise obsahu kolekcie zobraziť aj náhľady týchto meraní. Podobne pri reakciách chcem zobraziť chemický vzorec. Pri jednotlivých dokumentoch zobraziť ich detaily. Cez webové rozhranie tiež musí byť možné vytváranie nových kolekcií, podkolekcií a dokumentov.
 
-Webové užívateľské rozhranie by malo byť schopné zobraziť kolekcie, ktoré sú v repozitári, ich obsah (každá kolekcia môže mať podkolekcie alebo obsahovať dokumenty). Pri jednotlivých dokumentoch zobraziť ich detaily. Cez webové rozhranie tiež musí byť možné vytváranie nových kolekcií, podkolekcií a dokumentov. Vytvárať a upravovať dokumenty môže len prihlásený užívateľ, ktorý na to má pridelené oprávnenia. Modul teda musí umožniť aj prihlásenie užívateľa.
+Dokumenty majú rôzne dáta a metadáta, ktoré chceme zobraziť vo vhodnej forme. K jednotlivým typom dát a metadát teda potrebujem vytvoriť metódu pre ich vhodné zobrazenie.
 
-Prácu s dokumentmi zjednoduší Fedoralink, ktorý tvorí medzivrstvu medzi Fedorou, Elasticsearchom a samotným webovým rozhraním napísaným v programovacom jazyku Python s využitím frameworku Django. Prácu so šablónami zase zjednodušuje fedoralink\_ui, ktorý umožňuje získavať šablóny pre jednotlivé typy dokumentov priamo z Fedora alebo z kódu aplikácie. Prečo využívam tieto technológie a ako fungujú je popísané v predchádzajúcich častiach diplomovej práce.
+Technológie, ktoré máme vybrané, Fedora a Elasticsearch, umožňujú ukladanie dát a vyhľadávanie v dátach. Fedora tiež poskytuje základné webové užívateľské rozhranie, ktoré umožňuje vytváranie nových dokumentov, zobrazenie a úpravu existujúcich. Toto webové rozhranie ale nie je užívateľsky prívetivé, taktiež nevie zobrazovať dáta v inej než textovej podobe (napríklad grafy, obrázky, štruktúru chemických látok,...). Je preto potrebné vytvoriť nové webové rozhranie, ktoré umožní prácu s dokumentmi v repozitári.
 
-Pre prácu s jednotlivými dokumentmi je potrebné mať v aplikácii vytvorený model. Modely pre základné typy dokumentov sú už vytvorené vo Fedoralinku. Napríklad trieda DCObject - model pre dokumenty, ktoré obsahujú len metadáta zo schémy Dublin Core a majú priradený RDF typ DC.Object (\url{http://purl.org/dc/elements/1.1/Object}). V aplikácii fedoralink\_ui sú zase vytvorené modely potrebné pre prácu so šablónami. Napríklad trieda ResourceType, ktorá je určená pre dokumenty s RDF typom CESNET\_TYPE.ResourceType. Dokumenty s týmto RDF typom obsahujú šablóny pre zobrazenie v zozname potomkov kolekcie, zobrazenie dokumentu, editáciu dokumentu, názov a cestu k modelu v aplikácii.
+Jednotlivé časti repozitára sú navrhnuté tak, aby bolo pridanie nových modelov a šablón do systému čo najjednoduchšie.
 
-Jednotlivé časti repozitára sú navrhnuté tak, aby bolo pridanie nových modelov a šablón do systému čo najjednoduchšie. Aby bolo v repozitári možné pracovať s novými typmi dokumentov (napr. s dátami z Ústavu organickej chémie VŠCHT Praha) je potrebné vytvoriť modely pre tieto dokumenty a šablóny.
-
-\subsection{Kolekcie vo Fedore}
+\subsection{Kolekcie}
 
 \begin{figure}[h]\centering
 	\includegraphics[width=0.7\textwidth]{diagramy/Collections_Diagram.pdf}
  	\caption[Hierarchická štruktúra kolekcií vo Fedore]{Hierarchická štruktúra kolekcií vo Fedore}\label{graphics:CollectionsDiagram}
 \end{figure}
 
-Dokumenty vo Fedore sú uložené buď ako kolekcie alebo binárne dáta. Dokument, ktorý je typu kolekcia môže mať pod sebou uložené ďalšie dokumenty. Vzniká teda hierarchická štruktúra, ktorá začína koreňom repozitára.
-
-Ako prvú vec pri ukladaní nových dokumentov je potrebné vyriešiť ich hierarchické usporiadanie do rôznych kolekcií. V tejto časti diplomovej práce popisujem hierarchickú štruktúru rôznych typov dát Ústavu organickej chémie VŠCHT Praha, ktoré je potrebné ukladať, v repozitári.
+Keďže Fedora ukladá dáta v hierarchickej štruktúre (\ref{UkladanieDatFedora}), ako prvú vec pri ukladaní nových dokumentov je potrebné vyriešiť ich hierarchické usporiadanie do rôznych kolekcií. V tejto časti diplomovej práce popisujem hierarchickú štruktúru rôznych typov dát Ústavu organickej chémie VŠCHT Praha, ktoré je potrebné ukladať v repozitári.
 
 Hierarchickú štruktúru kolekcií je možné vidieť na obrázku \ref{graphics:CollectionsDiagram}
 
 \subsubsection{Inštitúcie}
-Do repozitára budú môcť dáta ukladať rôzne inštitúcie. Jednotlivé dokumenty je potrebné priradiť k inštitúcii, ktorej patria. Niektoré dáta ale môžu byť zdieľané medzi viacerými inštitúciami. Preto bude vytvorená kolekcia \uv{Institutions}, v ktorej sú uložené jednotlivé inštitúcie. Ak pri jednej inštitúcii potrebujeme evidovať aj jej súčasti, tie môžu byť uložené ako potomci inštitúcie.
+Do repozitára budú môcť ukladať dáta rôzne inštitúcie. Jednotlivé dokumenty je potrebné priradiť k inštitúcii, ktorej patria. Niektoré dáta ale môžu byť zdieľané medzi viacerými inštitúciami. Preto bude vytvorená kolekcia \uv{Institutions}, v ktorej sú uložené jednotlivé inštitúcie. Ak pri jednej inštitúcii potrebujeme evidovať aj jej súčasti, tie môžu byť uložené ako potomci inštitúcie.
 
 \subsubsection{Projekty}
 Dáta, s ktorými Ústav organickej chémie VŠCHT Praha a iné inštitúcie pracujú, sú priradené k jednotlivým projektom. Na projekte môže spolupracovať niekoľko inštitúcii a vedcov. Preto je pre projekty vytvorená kolekcia \uv{Projects}, pod ňou sú uložené jednotlivé projekty.
@@ -736,10 +744,10 @@ Vedec je osoba, ktorá sa podieľa na niektorom z projektov. Môže ale pracova�
 Laboratórne denníky Ústavu organickej chémie VŠCHT Praha, prípadne aj iných inštitúcií sú uložené pod kolekciou \uv{Laboratory journals}.
 
 \subsubsection{Reakcie}
-Reakcie, ktoré boli pozorované v rámci niektorého laboratórneho denníka sú uložené pod daným denníkom. Detaily (ako použité množstvo, koncentrácia,...) o reaktantoch a produktoch, teda chemických látkach, ktoré boli pri reakcii použité alebo pri nej vznikli, sú uložené pod touto reakciou.
+Reakcie, ktoré boli pozorované v rámci niektorého laboratórneho denníka, sú uložené pod daným denníkom. Detaily (ako použité množstvo, koncentrácia,...) o reaktantoch a produktoch, teda chemických látkach, ktoré boli pri reakcii použité alebo pri nej vznikli, sú uložené pod touto reakciou.
 
 \subsubsection{Chemické látky}
-Samotné dáta (názov chemikálie, jej štruktúra, vlastnosti,...) o chemikáliach, ktoré môžu byť používané v rôzných reakciách, sú uložené v kolekcii \uv{Chemicals}.
+Samotné dáta (názov chemikálie, jej štruktúra, vlastnosti,...) o chemikáliách, ktoré môžu byť používané v rôzných reakciách, sú uložené v kolekcii \uv{Chemicals}.
 
 \subsubsection{Analytické dáta}
 NMR, IR, hmotnostné spektrá jednotlivých chemických látok a iné analytické dáta sú uložené v samostatnej kolekcii \uv{Analytical data}. Všetky zdrojové binárne dáta (výstupy zo zariadení, serializované dáta z Open Enventory,...) sú uložené v kolekcii \uv{Source data}.
@@ -756,7 +764,7 @@ Pre projekty je vytvorená trieda Project, ktorá okrem názvu projektu má aj o
  	\caption[Model osoby - vedca]{Model osoby - vedca}\label{graphics:ScientistPerson}
 \end{figure}
 
-V laboratórnych denníkoch popisované reakcie má na starosť trieda Reaction (diagram triedy je možné nájsť na obrázku \ref{graphics:Reaction}). Medzi uložené údaje patrí popsi reakcie, pozorovanie, čas začiatku a trvanie reakcie. Reaktanty a produkty zapísané vo formáte SMILES (zjednodušený jednoriadkový zápis štruktúry). Samotné chemické látky v reakcii ale obsluhuje model ChemicalInReaction (diagram je možné vidieť na obrázku \ref{graphics:Chemical}), kde sú uvedené hodnoty ako váha, objem koncentrácia použitej látky v reakcii, či je v reakcii reaktant alebo produkt. Samotné chemické látky má na starosť trieda Chemical (\ref{graphics:Chemical})). Pri chemických látkach ukladáme hodnoty ako je štandardný názov prvku, CAS number, štruktúru chemického prvku.
+V laboratórnych denníkoch popisované reakcie má na starosti trieda Reaction (diagram triedy je možné nájsť na obrázku \ref{graphics:Reaction}). Medzi uložené údaje patrí popis reakcie, pozorovanie, čas začiatku a trvanie reakcie. Reaktanty a produkty sú zapísané vo formáte SMILES (zjednodušený jednoriadkový zápis štruktúry). Samotné chemické látky v reakcii ale obsluhuje model ChemicalInReaction (diagram je možné vidieť na obrázku \ref{graphics:Chemical}), kde sú uvedené hodnoty ako váha, objem, koncentrácia použitej látky v reakcii, či je v reakcii reaktant alebo produkt. Samotné chemické látky má na starosti trieda Chemical (\ref{graphics:Chemical}). Pri chemických látkach ukladáme hodnoty, ako je štandardný názov zlúčeniny, CAS number, štruktúru zlúčeniny.
 
 \begin{figure}\centering
 	\includegraphics[width=1.0\textwidth]{diagramy/UOCH_Chemical.png}
@@ -768,7 +776,7 @@ V laboratórnych denníkoch popisované reakcie má na starosť trieda Reaction 
  	\caption[Model reakcie]{Model reakcie}\label{graphics:Reaction}
 \end{figure}
 
-Analytické dáta k reakciám a chemickým látkam obsluhujú modely AnalyticalMethod, SpectroscopyMethod (napríklad NMR spektrá, IR spektrá, hmotnostné spektrá) a binárne dáta obsluhuje model SourceData a OpenEnventorySourceData (diagramy sú zobrazené na obrázku  \ref{graphics:AnalyticalMethod}). Za zdrojové dáta, ktoré ma na starosť trieda SourceData, považujeme napríklad dátové súbory s výsledkami analýz. OpenEnventorySourceData obsluhuje všetky serializované dáta k reakcii, získané importom z OpenEnventory.
+Analytické dáta k reakciám a chemickým látkam obsluhujú modely AnalyticalMethod, SpectroscopyMethod (napríklad NMR spektrá, IR spektrá, hmotnostné spektrá) a binárne dáta obsluhuje model SourceData a OpenEnventorySourceData (diagramy sú zobrazené na obrázku  \ref{graphics:AnalyticalMethod}). Za zdrojové dáta, ktoré má na starosti trieda SourceData, považujeme napríklad dátové súbory s výsledkami analýz. OpenEnventorySourceData obsluhuje všetky serializované dáta k reakcii, získané importom z OpenEnventory.
 
 \begin{figure}\centering
 	\includegraphics[width=0.9\textwidth]{diagramy/UOCH_AnalyticalMethod_and_SourceData.png}
@@ -776,7 +784,8 @@ Analytické dáta k reakciám a chemickým látkam obsluhujú modely AnalyticalM
 \end{figure}
 
 \section{Automatický import dát}
-Aby sme čo najviac zjednodušili vkladanie nových dát do repozitára, je potrebné upraviť niektorý z nástrojov na zber a organizáciu chemických dát, ktorý používajú výskumníci z Ústavu organickej chémie VŠCHT Praha. Pre účely diplomovej práce bol po dohode s výskumníkmi ako zdroj dát pre import vybraný nástroj Open Enventory.
+Výskumníci Ústavu organickej chémie VŠCHT Praha si dáta z meraní, priebehy pokusov a reakcie zapisujú do elektronických laboratórnych denníkov. Viac o týchto nástrojoch je popísané v časti \ref{ELN}.
+Aby sme čo najviac zjednodušili vkladanie nových dát do repozitára, je potrebné upraviť niektorý z nástrojov na zber a organizáciu chemických dát, tak, aby som umožnil import existujúcich dát do repozitára. Užívatelia teda nebudú musieť existujúce dáta prepisovať alebo nové ukladať dvakrát. Pre účely diplomovej práce bol po dohode s výskumníkmi ako zdroj dát pre import vybraný nástroj Open Enventory.
 
 Výskumníci na Ústave organickej chémie VŠCHT Praha chcú mať možnosť importovať do repozitára vybrané reakcie. K importu nemá dochádzať plne automaticky, ale až po potvrdení užívateľom. Pre tento účel je najlepšie implementovať tlačidlo umiestnené priamo vo webovej aplikácii Open Enventory. Aby bolo možné aplikáciu upraviť, je potrebné vedieť ako funguje, aké sú vzťahy medzi tabuľkami v databáze a nájsť vhodné umiestnenie pre tlačidlo.
 
@@ -830,13 +839,13 @@ V tabuľke analytical\_data sú uložené rôzne analýzy reakcie a chemických 
 % 	\caption[Štruktúra databázovej tabuľky reaction\_chemical, 2. časť]{Štruktúra databázovej tabuľky reaction\_chemical, 2. časť}\label{graphics:reactionChemical2}
 %\end{figure}
 
-V tabuľke reaction\_chemical (schéma je na obrázku \ref{graphics:reactionChemical1}) sú uložené informácie o reaktantoch a produktoch. Môže tu byť uvedený štandardný názov prvku v stĺpci standard\_name, tzv. SMILES teda zjednodušený jednoriadkový zápis štruktúry (uložené v stĺpci smiles). Binárne hodnoty popisujúce prvok v stĺpcoch molfile\_blob (MDL Molfile je súborový formát, ktorý umožňuje ukladať informácie o atómoch, spojeniach, prepojeniach a polohe molekúl), molecule\_serialized, gif\_file - obsahuje obrázok štruktúry prvku vo formáte GIF, svg\_file - štruktúra prvku na obrázku vo formáte SVG.
+V tabuľke reaction\_chemical (schéma je na obrázku \ref{graphics:reactionChemical1}) sú uložené informácie o reaktantoch a produktoch. Môže tu byť uvedený štandardný názov zlúčeniny v stĺpci standard\_name, tzv. SMILES teda zjednodušený jednoriadkový zápis štruktúry (uložené v stĺpci smiles). Binárne hodnoty popisujúce prvok v stĺpcoch molfile\_blob (MDL Molfile je súborový formát, ktorý umožňuje ukladať informácie o atómoch, spojeniach, prepojeniach a polohe molekúl), molecule\_serialized, gif\_file - obsahuje obrázok štruktúry zlúčeniny vo formáte GIF, svg\_file - štruktúra zlúčeniny na obrázku vo formáte SVG.
 
-Chemický vzorec prvku je uložený v stĺpci emp\_formula, molekulárna hmotnosť v stĺpci mw, poradie reaktantov a produktov je v stĺpci nr\_in\_reaction. Či ide o reaktant alebo produkt, sa dozvieme zo stĺpca role. Stochastický koeficient v stĺpci stoch\_coeff, hmotnosť v stĺpci m\_brutto, jednotka, v akej je hmotnosť uvedená, je v stĺpci mass\_unit, objem v stĺpci volume a jednotka objemu v stĺpci volume\_unit. Koncentrácia v stĺpci rc\_amount a jednotka, v akej je koncentrácia uvedená, je v stĺpci rc\_amount\_unit.
+Chemický vzorec zlúčeniny je uložený v stĺpci emp\_formula, molekulárna hmotnosť v stĺpci mw, poradie reaktantov a produktov je v stĺpci nr\_in\_reaction. Či ide o reaktant alebo produkt, sa dozvieme zo stĺpca role. Stochastický koeficient v stĺpci stoch\_coeff, hmotnosť v stĺpci m\_brutto, jednotka, v akej je hmotnosť uvedená, je v stĺpci mass\_unit, objem v stĺpci volume a jednotka objemu v stĺpci volume\_unit. Koncentrácia v stĺpci rc\_amount a jednotka, v akej je koncentrácia uvedená, je v stĺpci rc\_amount\_unit.
 V prípade produktov je v stĺpci yield uložené reálne získané množstvo v \% a z rc\_amount sa dá zistiť teoreticky získateľná koncentrácia.
 
 \subsection{Implementácia automatického importu}
-Štruktúru databázových tabuliek a prepojenia medzi nimi už poznáme, ďalej sa bolo potrebné rozhodnúť na spôsobe implementácie automatického importu dát z Open Enventory do repozitára.
+Štruktúru databázových tabuliek a prepojenia medzi nimi už poznám, ďalej sa bolo potrebné rozhodnúť na spôsobe implementácie automatického importu dát z Open Enventory do repozitára.
 
 Do úvahy prichádzajú dve možnosti:
 \begin{enumerate}
@@ -847,9 +856,11 @@ Do úvahy prichádzajú dve možnosti:
 Rozhodol som sa pre druhú možnosť, pričom využívam programovací jazyk Python a framework Django. Django, po nastavení pripojenia k databáze, umožňuje automatické vytvorenie modelov pre tabuľky v databáze. Vzhľadom na nezadefinované cudzie kľúče a ďalšie zistené chyby, bolo pre ľahšiu prácu s modelmi potrebné upraviť vygenerované triedy.
 
 \section{Kontrola stavov a prístupové práva} \label{stavy}
-Fedora umožňuje nastaviť práva pre jednotlivé dokumenty pomocou ACL. Takýmto spôsobom vieme nastaviť, kto môže daný dokument zobraziť, kto ho môže upraviť... Keďže má byť repozitár pre užívateľov čo najjednoduchší, nie je takéto nastavovanie prístupových práv ideálne. Tieto práva by bolo potrebné nastavovať a hlavne meniť pre každý dokument individuálne. Tak by mohlo dochádzať k častým chybám s nesprávne nastavenými oprávneniami. Preto som vytvoril nástroje, ktoré umožňujú kontrolu prístupových práv cez stavy. Tieto určujú, v akom stave alebo stavoch sa konkrétny dokument nachádza.
+Fedora umožňuje nastaviť práva pre jednotlivé dokumenty pomocou ACL. Takýmto spôsobom vieme nastaviť, kto môže daný dokument zobraziť, kto ho môže upraviť... Keďže má byť repozitár pre užívateľov čo najjednoduchší, nie je takéto nastavovanie prístupových práv ideálne. Tieto práva by bolo potrebné nastavovať a hlavne meniť pre každý dokument individuálne. Tak by mohlo dochádzať k častým chybám s nesprávne nastavenými oprávneniami. Chýba tu spôsob, akým by bolo možné meniť práva unifikovane vopred definovanými cestami. Preto som vytvoril nástroje, ktoré umožňujú kontrolu prístupových práv cez stavy. Tieto určujú, v akom stave alebo stavoch sa konkrétny dokument nachádza.
 
 Napríklad môže ísť o schvaľovací proces. Vložené dáta nesmú byť zverejnené hneď. Je potrebné, aby prešli procesom schvaľovania cez viacero ľudí. Prístup k tomuto dokumentu má na začiatku osoba, ktorá dokument vytvorila, tá môže požiadať o jeho zverejnenie. Zmení sa stav a nové nastavenie prístupových práv umožní, aby dáta videli aj osoby, ktoré majú právo schváliť zverejnenie. Po schválení všetkými potrebnými osobami dôjde opäť ku zmene stavu a prístupu k týmto dátam. Keď sa dokument nachádza v stave \uv{zverejnený}, môžu si ho prezerať všetci. Právo na editáciu ale ostane len pôvodnému autorovi prípadne editorovi. Po úprave bude ale opäť potrebné požiadať o schválenie.
+
+Takéto riadenie životného cyklu dokumentu bude možné definovať pre užívateľov s vyššími právami (administrátorov, vedúcich jednotlivých skupín,...). Definície, úprava stavov a oprávnení bude možná v administračnom rozhraní aplikácie. Ako je spomenuté v analýze (\ref{AdministracneRozhranie}), toto administračné rozhranie ale nie je súčasťou diplomovej práce.
 
 Možnosti Fedory, nutné úpravy a detailnejšie informácie o stavoch sú popísané nižšie.
 
@@ -944,12 +955,30 @@ ACL priradené na dokument typu state:Transition určuje, kto môže zmenu reali
 \subsection{Stavy vo Fedore}
 Vo Fedore žiadne stavy ani nástroje na kontrolu stavov a prechodov medzi nimi neexistujú. Aplikáciu je teda potrebné upraviť tak, aby takúto kontrolu umožňovala.
 
-Pri každom dopyte do Fedory potrebujeme skontrolovať, či dochádza k zmene stavu dokumentu. V prípade, ak áno, je potrebné skontrolovať oprávnenia a zmenu povoliť alebo zamietnuť. K ukladaniu upravených dokumentov dochádza vo funkcii patchResourcewithSparql v triede ContentExposingResource.
-K volaniu tejto funkcie ale dochádza z objektu, ktorý je typu FedoraLdp. Trieda FedoraLdp dedí z triedy ContentExposingResource. Obe sa nachádzajú v module fcrepo-http-api.
+Pri každom dopyte do Fedory potrebujeme skontrolovať, či dochádza k zmene stavu dokumentu. V prípade ak áno, je potrebné skontrolovať oprávnenia a zmenu povoliť alebo zamietnuť. Obsluhu HTTP požiadavkov na zobrazenie, úpravu a vytvorenie nových dokumentov má vo Fedore na starosti Servlet FedoraLdp. Metódy v ňom obluhujú HTTP požiadavky na REST Api. Za normálných okolností by stačilo vytvoriť novú triedu, ktorá by z FedoraLdp dedila a v nej predefinovať metódy, v ktorých sa kontrolujú stavy dokumentu. V tomto Java kóde nie je definicia URL adries v konfiguračnom súbore ale priamo v kóde pomocou anotácií. 
+\lstset{language=Java}
+\begin{lstlisting}[frame=single] 
+@Scope("request")
+@Path("/{path: .*}")
+public class FedoraLdp extends ContentExposingResource {
+...
+    @PATCH
+    @Consumes({contentTypeSPARQLUpdate})
+    @Timed
+    public Response updateSparql(@ContentLocation final InputStream requestBodyStream)
+            throws IOException {
+	...
+		patchResourcewithSparql(resource(), requestBody, resourceTriples);
+	...
+    }
+...
+}
+\end{lstlisting}
+Pri vytvorení novej triedy by teda nebolo možné zmeniť smerovanie HTTP požiadavkov na novovytvorenú triedu, URL adresy by sa stále mapovali na triedu FedoraLdp a jej metódy.
 
-Fedora sa stále rýchlo vyvíja. Aktuálne vývojári pracujú aj na API-X, ktoré umožní rozširovanie kódu Fedory. Momentálny stav vývoja API-X však neumožňuje jeho využitie pre úpravu potrebného kódu. Upravovať priamo kód modulu fcrepo-http-api by spôsobilo komplikácie pri aktualizácii Fedory, ale taktiež pri šírení takto upravenej verzie. Vytvoril by som v podstate novú vetvu vývoja Fedory, pričom by bolo pri vydaní novej verzie Fedory robiť zlúčenie medzi vetvami. Čo by mohlo byť vzhľadom na možné zmeny kódu aj v časti, ktorú potrebujem upraviť, komplikované.
+Fedora sa stále rýchlo vyvíja. Aktuálne vývojári pracujú aj na API-X, ktoré umožní rozširovanie kódu Fedory. Momentálny stav vývoja API-X však neumožňuje jeho využitie pre úpravu potrebného kódu. Upravovať priamo kód modulu fcrepo-http-api by spôsobilo komplikácie pri aktualizácii Fedory, ale taktiež pri šírení takto upravenej verzie. Vytvoril by som v podstate novú vetvu vývoja Fedory, pričom by bolo treba pri vydaní novej verzie Fedory robiť zlúčenie medzi vetvami. Čo by mohlo byť vzhľadom na možné zmeny kódu aj v časti, ktorú potrebujem upraviť, komplikované.
 
-Menej často sa menia rozhrania metód a ich parametre, to je možné využiť, ak existuje nástroj, ktorý umožňí rozšírenie existujúceho kódu mimo kódu Fedory. Riešením je vytvorenie Java aplikácie využívajúcej rozšírenie AspectJ. Pri správnom nastavení Mavenu vytvorí nový modul fcrepo-http-api obsahujúci upravený kód. V skompilovanej Fedore následne stačí vymeniť súbor fcrepo-http-api.jar za novovytvorený fcrepo-http-api-with-states.jar.
+Menej často sa menia rozhrania metód a ich parametre, to je možné využiť, ak existuje nástroj, ktorý umožní rozšírenie existujúceho kódu mimo kódu Fedory. Riešením je vytvorenie Java aplikácie využívajúcej rozšírenie AspectJ. K ukladaniu upravených dokumentov dochádza vo funkcii patchResourcewithSparql v triede ContentExposingResource. K volaniu tejto funkcie ale dochádza z objektu, ktorý je typu FedoraLdp. Trieda FedoraLdp dedí z triedy ContentExposingResource. Obe sa nachádzajú v module fcrepo-http-api. Pri správnom nastavení Mavenu sa pri kompilácii vytvorí nový modul fcrepo-http-api obsahujúci upravený kód. V skompilovanej Fedore následne stačí vymeniť súbor fcrepo-http-api.jar za novovytvorený fcrepo-http-api-with-states.jar. Novovytvorený kód je teda možné kompilovať nezávisle na Fedore.
 
 \subsubsection{AspectJ}
 V programovaní sa často využíva proces oddelenia zodpovedností (v angličtine Separation of concerns - SoC), ide o snahu rozdeliť program do samostatných častí, z ktorých každá má inú funkciu. Funkcie a kódy jednotlivých častí by sa mali čo najmenej prekrývať. O takéto oddelenie zodpovedností sa snaží aj aspektovo orientované programovanie (AOP).
@@ -1039,7 +1068,27 @@ Po získaní možných cieľových stavov z týchto prechodov aplikácia zistí,
 Ak sú povolené všetky nové stavy, aplikácia upraví pôvodný dopyt tak, aby sa všetky pôvodné stavy zmazali.
 
 \begin{conclusion}
-	%sem napíšte záver Vašej práce
+	Cieľom diplomovej práce bola analýza potrieb, návrh a implementácia modulov repozitára CESNET z.s.p.o., zamerané na dáta Ústavu organickej chémie VŠCHT Praha. Repozitár má byť jednoducho rozšíritelný aj o iné typy dát a metadát.
+
+V diplomovej práci som popísal existujúce repozitáre. Tiež nástroje na zber a organizáciu chemických dát, ktoré používajú výskumníci z Ústavu organickej chémie VŠCHT Praha. Tiež som zozbieral požiadavky na aplikáciu, aké dáta potrebujú ukladať a zobrazovať. Na základe požiadavkov boli vybrané vhodné nástroje, ktoré sú použité v repozitáry.
+
+Na ukladanie dát je použitá Fedora, na vyhľadávanie Elasticsearch. Zvolili sme programovací jazyk Python a framework Django na vytvorenie nového webového rozhrania. Aby bolo možné využívať Django tak, ako na to sú zvyknutí programátori pri práci s klasickými relačnými databázami, repozitár aplikácia využíva medzivrstvu Fedoralink.
+
+Aby bolo možné vo vhodnej forme zobrazovať rôzne dáta a metadáta, napríklad v náhľade reakcie zobraziť vzorec chemickej reakcie, vytvoril som moduly Fedoralink\_ui a súčasti (modely a HTML šablóny) pre webové rozhranie, umožňujúce pracovať s dátami Ústavu organickej chémie VŠCHT Praha. Zvolené a vytvorené nástroje umožňujú uloženie HTML šablón priamo vo Fedore.
+
+Ak by sme chceli rozšíriť repozitár o iné typy dát a metadát je potrebné vytvorenie modelov a HTML šablón pre tieto typy dát.
+
+Z požiadavkou vyplynula nutnosť nastavovať rôzne oprávnenia prístupu k dátam. Niektoré môžu byť zdieľané v tíme ľudí, niektoré majú byť verejne dostupné a ďalšie môžu byť viditeľné len pre ich autora. Fedora síce poskytuje nástroje pre nastavenie oprávnení, neumožňuje ale ich centrálnu správu a unifikovanú zmenu práv definovanými cestami. Preto som navrhol mechanizmus kontroly oprávnení pomocou stavov. Aby bolo možné tieto stavy využívať, bolo potrebné upraviť časť kódu Fedory. Zmeniť ho tak, aby nebolo nutné pri každej novej verzii spájať moju a oficiálnu vetvu vývoja ale nebolo jednoduché. Našiel som však spôsob, ako s využitím aspektovo orientovaného programovania zmeniť správanie existujúcej aplikácie bez nutnosti zásahu priamo do jéj kódu.
+
+Výskumníci Ústavu organickej chémie využívajú elektronické laboratórne denníky, do ktorých si ukladajú výsledky meraní, priebeh pokusov a reakcií. Chceli, aby bolo možné tieto dáta uložiť do repozitára, bez nutnosti ich manuálneho prepisovania. Preto som vytvoril nástroj, ktorý umožňuje automatický import dát z aplikácie Open Enventory do repozitára.
+
+Počas práce na týchto moduloch a nástrojoch nastával problém s prechodmi na nové verzie Fedory a Elasticsearch, kedy som musel upravovať kódy jednotlivých modulov, ale tiež Fedoralinku. Keďže ako aplikácia pre správu laboratórnych denníkov, z ktorej sa majú dáta importovať do repozitára, bolo zvolené Open Enventory, mal som problémy s pochopením jeho kódu. Dokumentácia k programu neexistuje, všetky kódy sú síce zverejnené, ale komentáre a aj časť kódu je v nemčine. Nakoniec som tento problém vyriešil samostatnou aplikáciou, ktorá pristupuje priamo k MySQL databázi a v Open Enventory teda stačí tlačidlo, ktoré túto aplikáciu pre import dát zavolá.
+
+Aby bol repozitár CESNET z.s.p.o. naozaj použiteľný, je potrebné dokončiť administračné rozhranie, ktoré nebolo súčasťou diplomovej práce. Toto rozhranie umožní správu užívateľov, prístupových práv, kolekcií. Tiež v ňom bude možné vytvárať a upravovať HTML šablóny. V budúcnosti by mohli byť podobne ako šablóny vo Fedore uložené aj modely jednotlivých typov dát a metadát. Taktiež je plánované napojenie na rôznych poskytovateľov identity ako Shibboleth alebo Perun.
+
+Pred spustením aplikácie pre verejnosť je potrebné spraviť testovanie použiteľnosti celej aplikácie.
+
+Záujem o využitie takéhoto repozitára už prejavilo viacero inštitúcií, okrem Ústavu organickej chémie aj Seminár romistiky Katedry stredoeurópskych štúdií Filozofickej fakulty Karlovej univerzity. Prácu na tomto repozitári som spoločne s Mgr. Miroslavom Šimkom prezentoval a diskutoval na medzinárodnej konferencii ILIDE 2016 (\url{http://ilideconference.schk.sk}).
 \end{conclusion}
 
 \bibliographystyle{csn690}
@@ -1070,111 +1119,7 @@ Ak sú povolené všetky nové stavy, aplikácia upraví pôvodný dopyt tak, ab
 \end{description}
 
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-% % Tuto kapitolu z výsledné práce ODSTRAŇTE.
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-% 
-% \chapter{Návod k~použití této šablony}
-% 
-% Tento dokument slouží jako základ pro napsání závěrečné práce na Fakultě informačních technologií ČVUT v~Praze.
-% 
-% \section{Výběr základu}
-% 
-% Vyberte si šablonu podle druhu práce (bakalářská, diplomová), jazyka (čeština, angličtina) a kódování (ASCII, \mbox{UTF-8}, \mbox{ISO-8859-2} neboli latin2 a nebo \mbox{Windows-1250}). 
-% 
-% V~české variantě naleznete šablony v~souborech pojmenovaných ve formátu práce\_kódování.tex. Typ může být:
-% \begin{description}
-% 	\item[BP] bakalářská práce,
-% 	\item[DP] diplomová (magisterská) práce.
-% \end{description}
-% Kódování, ve kterém chcete psát, může být:
-% \begin{description}
-% 	\item[UTF-8] kódování Unicode,
-% 	\item[ISO-8859-2] latin2,
-% 	\item[Windows-1250] znaková sada 1250 Windows.
-% \end{description}
-% V~případě nejistoty ohledně kódování doporučujeme následující postup:
-% \begin{enumerate}
-% 	\item Otevřete šablony pro kódování UTF-8 v~editoru prostého textu, který chcete pro psaní práce použít -- pokud můžete texty s~diakritikou normálně přečíst, použijte tuto šablonu.
-% 	\item V~opačném případě postupujte dále podle toho, jaký operační systém používáte:
-% 	\begin{itemize}
-% 		\item v~případě Windows použijte šablonu pro kódování \mbox{Windows-1250},
-% 		\item jinak zkuste použít šablonu pro kódování \mbox{ISO-8859-2}.
-% 	\end{itemize}
-% \end{enumerate}
-% 
-% 
-% V~anglické variantě jsou šablony pojmenované podle typu práce, možnosti jsou:
-% \begin{description}
-% 	\item[bachelors] bakalářská práce,
-% 	\item[masters] diplomová (magisterská) práce.
-% \end{description}
-% 
-% \section{Použití šablony}
-% 
-% Šablona je určena pro zpracování systémem \LaTeXe{}. Text je možné psát v~textovém editoru jako prostý text, lze však také využít specializovaný editor pro \LaTeX{}, např. Kile.
-% 
-% Pro získání tisknutelného výstupu z~takto vytvořeného souboru použijte příkaz \verb|pdflatex|, kterému předáte cestu k~souboru jako parametr. Vhodný editor pro \LaTeX{} toto udělá za Vás. \verb|pdfcslatex| ani \verb|cslatex| \emph{nebudou} s~těmito šablonami fungovat.
-% 
-% Více informací o~použití systému \LaTeX{} najdete např. v~\cite{wikilatex}.
-% 
-% \subsection{Typografie}
-% 
-% Při psaní dodržujte typografické konvence zvoleného jazyka. České \uv{uvozovky} zapisujte použitím příkazu \verb|\uv|, kterému v~parametru předáte text, jenž má být v~uvozovkách. Anglické otevírací uvozovky se v~\LaTeX{}u zadávají jako dva zpětné apostrofy, uzavírací uvozovky jako dva apostrofy. Často chybně uváděný symbol "{} (palce) nemá s~uvozovkami nic společného.
-% 
-% Dále je třeba zabránit zalomení řádky mezi některými slovy, v~češtině např. za jednopísmennými předložkami a spojkami (vyjma \uv{a}). To docílíte vložením pružné nezalomitelné mezery -- znakem \texttt{\textasciitilde}. V~tomto případě to není třeba dělat ručně, lze použít program \verb|vlna|.
-% 
-% Více o~typografii viz \cite{kobltypo}.
-% 
-% \subsection{Obrázky}
-% 
-% Pro umožnění vkládání obrázků je vhodné použít balíček \verb|graphicx|, samotné vložení se provede příkazem \verb|\includegraphics|. Takto je možné vkládat obrázky ve formátu PDF, PNG a JPEG jestliže používáte pdf\LaTeX{} nebo ve formátu EPS jestliže používáte \LaTeX{}. Doporučujeme preferovat vektorové obrázky před rastrovými (vyjma fotografií).
-% 
-% \subsubsection{Získání vhodného formátu}
-% 
-% Pro získání vektorových formátů PDF nebo EPS z~jiných lze použít některý z~vektorových grafických editorů. Pro převod rastrového obrázku na vektorový lze použít rasterizaci, kterou mnohé editory zvládají (např. Inkscape). Pro konverze lze použít též nástroje pro dávkové zpracování běžně dodávané s~\LaTeX{}em, např. \verb|epstopdf|.
-% 
-% \subsubsection{Plovoucí prostředí}
-% 
-% Příkazem \verb|\includegraphics| lze obrázky vkládat přímo, doporučujeme však použít plovoucí prostředí, konkrétně \verb|figure|. Například obrázek \ref{fig:float} byl vložen tímto způsobem. Vůbec přitom nevadí, když je obrázek umístěn jinde, než bylo původně zamýšleno -- je tomu tak hlavně kvůli dodržení typografických konvencí. Namísto vynucování konkrétní pozice obrázku doporučujeme používat odkazování z~textu (dvojice příkazů \verb|\label| a \verb|\ref|).
-% 
-% \begin{figure}\centering
-% 	\includegraphics[width=0.5\textwidth, angle=30]{cvut-logo-bw}
-% 	\caption[Příklad obrázku]{Ukázkový obrázek v~plovoucím prostředí}\label{fig:float}
-% \end{figure}
-% 
-% \subsubsection{Verze obrázků}
-% 
-% % Gnuplot BW i barevně
-% Může se hodit mít více verzí stejného obrázku, např. pro barevný či černobílý tisk a nebo pro prezentaci. S~pomocí některých nástrojů na generování grafiky je to snadné.
-% 
-% Máte-li například graf vytvořený v programu Gnuplot, můžete jeho černobílou variantu (viz obr. \ref{fig:gnuplot-bw}) vytvořit parametrem \verb|monochrome dashed| příkazu \verb|set term|. Barevnou variantu (viz obr. \ref{fig:gnuplot-col}) vhodnou na prezentace lze vytvořit parametrem \verb|colour solid|.
-% 
-% \begin{figure}\centering
-% 	\includegraphics{gnuplot-bw}
-% 	\caption{Černobílá varianta obrázku generovaného programem Gnuplot}\label{fig:gnuplot-bw}
-% \end{figure}
-% 
-% \begin{figure}\centering
-% 	\includegraphics{gnuplot-col}
-% 	\caption{Barevná varianta obrázku generovaného programem Gnuplot}\label{fig:gnuplot-col}
-% \end{figure}
-% 
-% 
-% \subsection{Tabulky}
-% 
-% Tabulky lze zadávat různě, např. v~prostředí \verb|tabular|, avšak pro jejich vkládání platí to samé, co pro obrázky -- použijte plovoucí prostředí, v~tomto případě \verb|table|. Například tabulka \ref{tab:matematika} byla vložena tímto způsobem.
-% 
-% \begin{table}\centering
-% 	\caption[Příklad tabulky]{Zadávání matematiky}\label{tab:matematika}
-% 	\begin{tabular}{|l|l|c|c|}\hline
-% 		Typ		& Prostředí		& \LaTeX{}ovská zkratka	& \TeX{}ovská zkratka	\tabularnewline \hline \hline
-% 		Text		& \verb|math|		& \verb|\(...\)|	& \verb|$...$|		\tabularnewline \hline
-% 		Displayed	& \verb|displaymath|	& \verb|\[...\]|	& \verb|$$...$$|	\tabularnewline \hline
-% 	\end{tabular}
-% \end{table}
-% 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
 
 \chapter{Obsah priloženého CD}
 
