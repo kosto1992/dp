@@ -1,7 +1,9 @@
 ## Diplomová práca
 # Spracovanie a vizualizácia chemických meraní v dátovom repozitári
 Bc. Lukáš Koštenský
+
 Vedúci práce: RNDr. David Antoš, Ph.D.
+
 6. mája 2017
 
 ### Abstrakt
